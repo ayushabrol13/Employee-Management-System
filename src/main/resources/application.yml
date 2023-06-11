@@ -1,3 +1,9 @@
 server:
   port: 8080
 
+#caffeine configuration
+spring:
+  cache:
+    cache-names: employees
+    caffeine:
+      spec: maximumSize=500, expireAfterAccess=60M
