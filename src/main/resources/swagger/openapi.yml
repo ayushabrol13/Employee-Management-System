@@ -1,68 +1,132 @@
-openapi: '3.0.2'
-
+openapi: 3.0.1
 info:
-  title: Employees
-  version: "0.0.1"
-  description: Employee resources
-
-servers:
-  - url: http://localhost:8080/api
-    description: Local Server
-
+  title: Spring OpenAPI
+  description: Spring OpenAPI
+  version: 1.0.0
+  contact:
+    email: soni.12@iitj.ac.in
+tags:
+  - name: employee-controller
+    description: Employee Controller
+    externalDocs:
+      description: Employee Controller
+      url: http://swagger.io
 paths:
-  /employees:
+  /employee:
+    # build get Rest api to get all employees
+    get:
+      tags:
+        - employee-controller
+      summary: getAllEmployees
+      operationId: getAllEmployees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+    # build post Rest api to add new employee in database
     post:
-      summary: Create Employee
-      operationId: createEmployee
+      tags:
+        - employee-controller
+      summary: addEmployee
+      operationId: addEmployee
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Employees'
+              $ref: '#/components/schemas/Employee'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employees'
+                $ref: '#/components/schemas/Employee'
+
+
+  /employee/{id}:
+    # build get Rest api to get employee by id
     get:
-      #      tags:
-      #        - employees
-      summary: Get list of all employees
-      operationId: getEmployees
+      tags:
+        - employee-controller
+      summary: getEmployeeById
+      operationId: getEmployeeById
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Employees'
-#    get:
-#      description: Returns Employee by id
-#      summary: Get Employee by Id
-#      operationId: getEmployeesById
+                $ref: '#/components/schemas/Employee'
 
+    # build put Rest api to update employee by id and throw error if not found
+    put:
+      tags:
+        - employee-controller
+      summary: updateEmployee
+      operationId: updateEmployee
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
 
-
+    # build delete Rest api to delete employee by id and throw error if not found
+    delete:
+      tags:
+        - employee-controller
+      summary: deleteEmployee
+      operationId: deleteEmployee
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
 
 components:
   schemas:
-    Employees:
+    Employee:
       type: object
-      description: Data Element for Employees
       properties:
-        empId:
+        id:
           type: integer
-          format: uuid
-        empMail:
+        name:
           type: string
-        empName:
+        salary:
+          type: integer
+        department:
           type: string
-          required: true
-          minLength: 3
-        empDepartment:
-          type: string
-      required:
-        - id
-        - empName

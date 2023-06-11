@@ -24,8 +24,8 @@ public class EmployeesController {
     }
 
     @GetMapping("/employees/{eid}")
-    public Employees fetchEmployee(@PathVariable("eid") int eId) {
-        return empService.fetchDepartmentById(eId);
+    public Employees fetchEmployee(@PathVariable("eid") int empId) {
+        return empService.fetchEmployeeById(empId);
     }
 
     @PutMapping("/employees")
