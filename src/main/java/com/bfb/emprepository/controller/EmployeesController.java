@@ -13,6 +13,7 @@ public class EmployeesController {
     @Autowired
     private EmpService empService;
 
+
     @PostMapping("/employees")
     public Employees createEmployee(@RequestBody Employees employee) {
         return empService.createEmployee(employee);
@@ -23,9 +24,10 @@ public class EmployeesController {
         return empService.fetchEmployees();
     }
 
+
     @GetMapping("/employees/{eid}")
-    public Employees fetchEmployee(@PathVariable("eid") int empId) {
-        return empService.fetchEmployeeById(empId);
+    public Employees fetchEmployeeById(@PathVariable("eid") int eId) {
+        return empService.fetchEmployeeById(eId);
     }
 
     @PutMapping("/employees")
