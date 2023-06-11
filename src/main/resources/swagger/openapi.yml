@@ -1,0 +1,68 @@
+openapi: '3.0.2'
+
+info:
+  title: Employees
+  version: "0.0.1"
+  description: Employee resources
+
+servers:
+  - url: http://localhost:8080/api
+    description: Local Server
+
+paths:
+  /employees:
+    post:
+      summary: Create Employee
+      operationId: createEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employees'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employees'
+    get:
+      #      tags:
+      #        - employees
+      summary: Get list of all employees
+      operationId: getEmployees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employees'
+#    get:
+#      description: Returns Employee by id
+#      summary: Get Employee by Id
+#      operationId: getEmployeesById
+
+
+
+
+components:
+  schemas:
+    Employees:
+      type: object
+      description: Data Element for Employees
+      properties:
+        empId:
+          type: integer
+          format: uuid
+        empMail:
+          type: string
+        empName:
+          type: string
+          required: true
+          minLength: 3
+        empDepartment:
+          type: string
+      required:
+        - id
+        - empName
