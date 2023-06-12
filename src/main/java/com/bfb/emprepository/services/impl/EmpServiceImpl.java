@@ -27,10 +27,12 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public Employees updateEmployee(Employees emp) {
         Employees existingEmp = employeeRepo.findById(emp.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", emp.getEmpId()));
+        existingEmp.setId(emp.getId());
         existingEmp.setName(emp.getName());
         existingEmp.setSalary(emp.getSalary());
         existingEmp.setDepartment(emp.getDepartment());
-        return employeeRepo.save(existingEmp);
+        employeeRepo.save(existingEmp);
+        return existingEmp;
     }
 
     @Override
