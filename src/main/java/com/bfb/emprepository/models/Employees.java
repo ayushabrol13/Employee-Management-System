@@ -7,12 +7,8 @@ import jakarta.persistence.*;
 public class Employees {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer empId;
-
-
-    @Column(name = "id")
-    private Integer id;
 
     @Column(name = "name", nullable = false, length = 20)
     private String name;
@@ -27,10 +23,9 @@ public class Employees {
         super();
     }
 
-    public Employees(Integer empId, Integer id, String name, String department, Integer salary) {
+    public Employees(Integer empId, String name, String department, Integer salary) {
         super();
         this.empId = empId;
-        this.id = id;
         this.name = name;
         this.department = department;
         this.salary = salary;
@@ -42,15 +37,6 @@ public class Employees {
 
     public void setEmpId(Integer empId) {
         this.empId = empId;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

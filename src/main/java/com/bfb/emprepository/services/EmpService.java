@@ -8,7 +8,7 @@ public interface EmpService {
 
     public Employees createEmployee(Employees employee);
     public Employees fetchEmployeeById(int eId);
-    public Employees updateEmployee(Employees emp);
+    public Employees updateEmployee(Employees employee);
     public String deleteEmployee(int empId);
     public List<Employees> fetchEmployees();
 }
