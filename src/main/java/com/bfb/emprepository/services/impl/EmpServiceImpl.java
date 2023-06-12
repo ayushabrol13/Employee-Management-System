@@ -14,10 +14,10 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmployeeRepo employeeRepo;
 
-    public EmpServiceImpl(EmployeeRepo employeeRepo) {
-        super();
-        this.employeeRepo = employeeRepo;
-    }
+//    public EmpServiceImpl(EmployeeRepo employeeRepo) {
+//        super();
+//        this.employeeRepo = employeeRepo;
+//    }
 
     @Override
     public Employees fetchEmployeeById(int eId) {
@@ -49,6 +49,4 @@ public class EmpServiceImpl implements EmpService {
     public List<Employees> fetchEmployees() {
         return employeeRepo.findAll();
     }
-
-
 }

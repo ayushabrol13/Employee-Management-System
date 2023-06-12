@@ -9,8 +9,6 @@ import java.util.List;
 
 @RestController
 public class EmployeesController {
-
-    @Autowired
     private EmpService empService;
 
 
@@ -26,8 +24,8 @@ public class EmployeesController {
 
 
     @GetMapping("/employees/{eid}")
-    public Employees fetchEmployeeById(@PathVariable("eid") int eId) {
-        return empService.fetchEmployeeById(eId);
+    public Employees fetchEmployeeById(@PathVariable("eid") int empId) {
+        return empService.fetchEmployeeById(empId);
     }
 
     @PutMapping("/employees")
