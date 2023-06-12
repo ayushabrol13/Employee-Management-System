@@ -1,6 +1,6 @@
 package com.bfb.emprepository.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employeeData")

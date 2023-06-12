@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 public class EmployeesController {
+    @Autowired
     private EmpService empService;
 
 
@@ -34,7 +35,7 @@ public class EmployeesController {
     }
 
     @DeleteMapping("/employees/{eid}")
-    public String deleteEmployee(@PathVariable("eid") int empId){
+    public String deleteEmployee(@PathVariable("eid") int empId) {
         empService.deleteEmployee(empId);
         return "Employee with id " + empId + " got deleted successfully...";
     }
