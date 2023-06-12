@@ -1,6 +1,8 @@
 package com.bfb.emprepository.services.impl;
 
 import com.bfb.emprepository.dao.EmployeeRepo;
+import com.bfb.emprepository.exceptions.DatabaseEmptyException;
+import com.bfb.emprepository.exceptions.InputFieldsEmptyException;
 import com.bfb.emprepository.exceptions.ResourceNotFoundException;
 import com.bfb.emprepository.models.Employees;
 import com.bfb.emprepository.services.EmpService;
@@ -27,6 +29,8 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public Employees updateEmployee(Employees employee) {
         Employees existingEmp = employeeRepo.findById(employee.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", employee.getEmpId()));
+        if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+            throw new InputFieldsEmptyException();
         existingEmp.setName(employee.getName());
         existingEmp.setSalary(employee.getSalary());
         existingEmp.setDepartment(employee.getDepartment());
@@ -36,6 +40,8 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public Employees createEmployee(Employees employee) {
+        if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+            throw new InputFieldsEmptyException();
         return employeeRepo.save(employee);
     }
 
@@ -48,6 +54,9 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<Employees> fetchEmployees() {
-        return employeeRepo.findAll();
+        List<Employees> el= employeeRepo.findAll();
+        if(el==null || el.size()==0)
+            throw new DatabaseEmptyException();
+        return el;
     }
 }
