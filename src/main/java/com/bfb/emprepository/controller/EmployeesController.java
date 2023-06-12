@@ -25,19 +25,24 @@ public class EmployeesController {
     }
 
 
-    @GetMapping("/employees/{eid}")
-    public Employees fetchEmployeeById(@PathVariable("eid") int empId) {
-        return empService.fetchEmployeeById(empId);
+    @GetMapping("/employees/{eId}")
+    public Employees fetchEmployeeById(@PathVariable("eId") int eId) {
+        return empService.fetchEmployeeById(eId);
     }
 
     @PutMapping("/employees")
-    public Employees updateEmployee(@RequestBody Employees employee) {
-        return empService.updateEmployee(employee);
+    public Employees updateEmployee(@RequestBody Employees emp) {
+        return empService.updateEmployee(emp);
     }
 
     @DeleteMapping("/employees/{eid}")
     public String deleteEmployee(@PathVariable("eid") int empId) {
         empService.deleteEmployee(empId);
         return "Employee with id " + empId + " got deleted successfully...";
+    }
+
+    @GetMapping("/employees/dep/{depName}")
+    public List<Employees> fetchEmployeeByDepartment(@PathVariable("depName") String depName){
+        return empService.fetchEmployeeByDepartment(depName);
     }
 }

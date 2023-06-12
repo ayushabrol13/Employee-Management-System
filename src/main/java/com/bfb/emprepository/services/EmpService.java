@@ -11,4 +11,6 @@ public interface EmpService {
     public Employees updateEmployee(Employees employee);
     public String deleteEmployee(int empId);
     public List<Employees> fetchEmployees();
+
+    public List<Employees> fetchEmployeeByDepartment(String depName);
 }

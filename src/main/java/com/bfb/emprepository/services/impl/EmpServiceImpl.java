@@ -6,17 +6,13 @@ import com.bfb.emprepository.exceptions.InputFieldsEmptyException;
 import com.bfb.emprepository.exceptions.ResourceNotFoundException;
 import com.bfb.emprepository.models.Employees;
 import com.bfb.emprepository.services.EmpService;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.*;
 
 @Service
@@ -72,5 +68,10 @@ public class EmpServiceImpl implements EmpService {
         if(el==null || el.size()==0)
             throw new DatabaseEmptyException();
         return el;
+    }
+
+    @Override
+    public List<Employees> fetchEmployeeByDepartment(String depName) {
+        return employeeRepo.findByDepartmentIgnoreCase(depName);
     }
 }

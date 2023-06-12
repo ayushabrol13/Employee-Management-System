@@ -1,4 +1,4 @@
-package com.bfb.emprepository.ErrorHandler;
+package com.bfb.emprepository.errors;
 
 import com.bfb.emprepository.exceptions.DatabaseEmptyException;
 import com.bfb.emprepository.exceptions.InputFieldsEmptyException;
@@ -41,6 +41,7 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         return new ResponseEntity<Object>("Please change your method",HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> globalExceptionHandler(HttpServletRequest req, Exception ex){
         return new ResponseEntity<Error>(new Error(req.getRequestURI(),ex.getMessage()),HttpStatus.BAD_REQUEST);
