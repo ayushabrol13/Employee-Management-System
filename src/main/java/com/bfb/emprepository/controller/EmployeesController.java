@@ -9,10 +9,7 @@ import java.util.List;
 
 @RestController
 public class EmployeesController {
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/main
     @Autowired
     private EmpService empService;
 
