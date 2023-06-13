@@ -36,9 +36,10 @@ public class EmpServiceImpl implements EmpService {
     @Override
     @CachePut(cacheNames = "employees")
     public Employees replaceEmployee(Employees employee) {
-        Employees existingEmp = employeeRepo.findById(employee.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", employee.getEmpId()));
+        Employees existingEmp = new Employees();
         if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
+        existingEmp.setEmpId(employee.getEmpId());
         existingEmp.setName(employee.getName());
         existingEmp.setSalary(employee.getSalary());
         existingEmp.setDepartment(employee.getDepartment());
