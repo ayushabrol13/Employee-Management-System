@@ -20,31 +20,31 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<Error> nullPointerExceptionHandler(HttpServletRequest req, HttpServletResponse res, Exception ex) {
-        return new ResponseEntity<>(new Error(req.getRequestURI(),"This is message"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new Error(req.getRequestURI(),"Some null Pointer exception has occured","400","Some null pointer exception has occured."), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InputFieldsEmptyException.class)
     public ResponseEntity<Error> InputFieldsEmptyExceptionHandler(HttpServletRequest req, Exception ex){
-        return new ResponseEntity<>(new Error(req.getRequestURI(), ex.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Error(req.getRequestURI(), ex.getMessage(),"400","Some important field values missing.You must provide the field values for all required data."), HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Error> ResourceNotFoundExceptionHandler(HttpServletRequest req, Exception ex){
-        return new ResponseEntity<>(new Error(req.getRequestURI(),ex.getMessage()),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new Error(req.getRequestURI(),ex.getMessage(),"404","The particular employee id provided is not found in the database. Please contact admin for further details"),HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(DatabaseEmptyException.class)
     public ResponseEntity<Error> DatabaseEmptyExceptionHandler(HttpServletRequest req, Exception ex){
-        return new ResponseEntity<>(new Error(req.getRequestURI(),ex.getMessage()),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new Error(req.getRequestURI(),ex.getMessage(),"404","The database does not contain any employee data. It is empty. Please contact admin."),HttpStatus.NOT_FOUND);
     }
 
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        return new ResponseEntity<Object>("Please change your method",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Object>("Bad Request. The request method and the url are not compatible. Please check the method",HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> globalExceptionHandler(HttpServletRequest req, Exception ex){
-        return new ResponseEntity<Error>(new Error(req.getRequestURI(),ex.getMessage()),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Error>(new Error(req.getRequestURI(),ex.getMessage(),"400","Some error has occured. Please contact admin for further details"),HttpStatus.BAD_REQUEST);
     }
 
 
