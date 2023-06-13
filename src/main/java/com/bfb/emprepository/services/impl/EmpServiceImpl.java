@@ -36,14 +36,27 @@ public class EmpServiceImpl implements EmpService {
     @Override
     @CachePut(cacheNames = "employees")
     public Employees replaceEmployee(Employees employee) {
-        Employees existingEmp = employeeRepo.findById(employee.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", employee.getEmpId()));
-        if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+        try{
+            Employees existingEmp = employeeRepo.findById(employee.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", employee.getEmpId()));
+            if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+                throw new InputFieldsEmptyException();
+            existingEmp.setName(employee.getName());
+            existingEmp.setSalary(employee.getSalary());
+            existingEmp.setDepartment(employee.getDepartment());
+            employeeRepo.save(existingEmp);
+            return existingEmp;
+        }
+        catch (ResourceNotFoundException e){
+            Employees newEmp = new Employees();
+            newEmp.setEmpId(employee.getEmpId());
+            newEmp.setName(employee.getName());
+            newEmp.setSalary(employee.getSalary());
+            newEmp.setDepartment(employee.getDepartment());
+            return employeeRepo.save(newEmp);
+        }
+        catch (InputFieldsEmptyException e){
             throw new InputFieldsEmptyException();
-        existingEmp.setName(employee.getName());
-        existingEmp.setSalary(employee.getSalary());
-        existingEmp.setDepartment(employee.getDepartment());
-        employeeRepo.save(existingEmp);
-        return existingEmp;
+        }
     }
 
     @Override
