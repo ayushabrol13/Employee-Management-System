@@ -7,8 +7,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Error {
-    private String url;
-    private String message;
+    private String type;
+    private String title;
+    private String status;
+    private String detail;
 
 //    public String getUrl() {
 //        return url;
@@ -31,14 +33,14 @@ public class Error {
 //        this.message=message;
 //    }
 
-    public Error(HttpServletRequest request, String message){
-        this.url=request.getRequestURI().toString();
-        this.message=message;
+    public Error(HttpServletRequest request, String message, String status,String detail){
+        this.type=request.getRequestURI().toString();
+        this.title=message;
     }
 
     public Error(HttpServletRequest request, Exception ex){
-        this.url=request.getRequestURI().toString();
-        this.message=ex.getMessage();
+        this.type=request.getRequestURI().toString();
+        this.title=ex.getMessage();
     }
 
 }
