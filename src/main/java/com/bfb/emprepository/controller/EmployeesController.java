@@ -2,6 +2,7 @@ package com.bfb.emprepository.controller;
 
 import com.bfb.emprepository.models.Employees;
 import com.bfb.emprepository.services.EmpService;
+import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,8 @@ public class EmployeesController {
     }
 
     @PutMapping("/employees")
-    public Employees updateEmployee(@RequestBody Employees emp) {
-        return empService.updateEmployee(emp);
+    public Employees replaceEmployee(@RequestBody Employees emp) {
+        return empService.replaceEmployee(emp);
     }
 
     @DeleteMapping("/employees/{eid}")
@@ -42,7 +43,12 @@ public class EmployeesController {
     }
 
     @GetMapping("/employees/dep/{depName}")
-    public List<Employees> fetchEmployeeByDepartment(@PathVariable("depName") String depName){
+    public List<Employees> fetchEmployeeByDepartment(@PathVariable("depName") String depName) {
         return empService.fetchEmployeeByDepartment(depName);
+    }
+
+    @PatchMapping("/employees/{eId}")
+    public Employees updateEmployeeById(@PathVariable("eId") Integer eId, @RequestBody Employees employees){
+        return empService.updateEmployeeById(eId, employees);
     }
 }

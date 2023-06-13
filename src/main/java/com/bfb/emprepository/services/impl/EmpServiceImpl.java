@@ -35,7 +35,7 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     @CachePut(cacheNames = "employees")
-    public Employees updateEmployee(Employees employee) {
+    public Employees replaceEmployee(Employees employee) {
         Employees existingEmp = employeeRepo.findById(employee.getEmpId()).orElseThrow(() -> new ResourceNotFoundException("Employee", "Id", employee.getEmpId()));
         if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
@@ -73,5 +73,21 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public List<Employees> fetchEmployeeByDepartment(String depName) {
         return employeeRepo.findByDepartmentIgnoreCase(depName);
+    }
+
+    @Override
+    public Employees updateEmployeeById(Integer eId, Employees employees) {
+        Employees emp = employeeRepo.findById(eId).get();
+
+        if(Objects.nonNull(employees.getName()) && !"".equalsIgnoreCase(employees.getName())){
+            emp.setName(employees.getName());
+        }
+        if (Objects.nonNull(employees.getDepartment()) && !"".equalsIgnoreCase(employees.getDepartment())){
+            emp.setDepartment(employees.getDepartment());
+        }
+        if (Objects.nonNull(employees.getSalary()) && !"".equalsIgnoreCase(employees.getSalary().toString())){
+            emp.setSalary(employees.getSalary());
+        }
+        return employeeRepo.save(emp);
     }
 }
