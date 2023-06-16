@@ -4,7 +4,7 @@ import com.bfb.emprepository.dao.EmployeeRepo;
 import com.bfb.emprepository.exceptions.DatabaseEmptyException;
 import com.bfb.emprepository.exceptions.InputFieldsEmptyException;
 import com.bfb.emprepository.exceptions.ResourceNotFoundException;
-import com.bfb.emprepository.models.Employees;
+import com.bfb.emprepository.entities.Employees;
 import com.bfb.emprepository.services.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -37,12 +37,12 @@ public class EmpServiceImpl implements EmpService {
     @CachePut(cacheNames = "employees")
     public Employees replaceEmployee(Employees employee) {
         Employees existingEmp = new Employees();
-        if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
         existingEmp.setEmpId(employee.getEmpId());
         existingEmp.setName(employee.getName());
         existingEmp.setSalary(employee.getSalary());
-        existingEmp.setDepartment(employee.getDepartment());
+        existingEmp.setMail(employee.getMail());
         employeeRepo.save(existingEmp);
         return existingEmp;
     }
@@ -50,7 +50,7 @@ public class EmpServiceImpl implements EmpService {
     @Override
     @CachePut(cacheNames = "employees")
     public Employees createEmployee(Employees employee) {
-        if(employee.getDepartment().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
         return employeeRepo.save(employee);
     }
@@ -71,10 +71,6 @@ public class EmpServiceImpl implements EmpService {
         return el;
     }
 
-    @Override
-    public List<Employees> fetchEmployeeByDepartment(String depName) {
-        return employeeRepo.findByDepartmentIgnoreCase(depName);
-    }
 
     @Override
     public Employees updateEmployeeById(Integer eId, Employees employees) {
@@ -83,8 +79,8 @@ public class EmpServiceImpl implements EmpService {
         if(Objects.nonNull(employees.getName()) && !"".equalsIgnoreCase(employees.getName())){
             emp.setName(employees.getName());
         }
-        if (Objects.nonNull(employees.getDepartment()) && !"".equalsIgnoreCase(employees.getDepartment())){
-            emp.setDepartment(employees.getDepartment());
+        if (Objects.nonNull(employees.getMail()) && !"".equalsIgnoreCase(employees.getMail())){
+            emp.setMail(employees.getMail());
         }
         if (Objects.nonNull(employees.getSalary()) && !"".equalsIgnoreCase(employees.getSalary().toString())){
             emp.setSalary(employees.getSalary());

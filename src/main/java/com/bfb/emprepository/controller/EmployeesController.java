@@ -1,14 +1,14 @@
 package com.bfb.emprepository.controller;
 
-import com.bfb.emprepository.models.Employees;
+import com.bfb.emprepository.entities.Employees;
 import com.bfb.emprepository.services.EmpService;
-import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class EmployeesController {
 
     @Autowired
@@ -42,10 +42,6 @@ public class EmployeesController {
         return "Employee with id " + empId + " got deleted successfully...";
     }
 
-    @GetMapping("/employees/dep/{depName}")
-    public List<Employees> fetchEmployeeByDepartment(@PathVariable("depName") String depName) {
-        return empService.fetchEmployeeByDepartment(depName);
-    }
 
     @PatchMapping("/employees/{eId}")
     public Employees updateEmployeeById(@PathVariable("eId") Integer eId, @RequestBody Employees employees){
