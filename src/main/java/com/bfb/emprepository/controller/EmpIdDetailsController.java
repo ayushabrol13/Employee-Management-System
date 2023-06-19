@@ -20,7 +20,13 @@ public class EmpIdDetailsController {
     }
 
     @GetMapping("")
-    public List<EmpIdentityDetails> fetchEmployeesIdDetails(){
+    public List<EmpIdentityDetails> fetchEmployeesIdDetails() {
         return ser.fetchEmployeesIdDetails();
+    }
+
+    @DeleteMapping("/{detailsId}")
+    public String deleteEmpIdDetails(@PathVariable("detailsId") Integer detailsId) {
+        ser.deleteEmpIdDetails(detailsId);
+        return "Employee Identity Details with id "+ detailsId +"got deleted successfully...";
     }
 }

@@ -19,6 +19,7 @@ public class EmpIdentityDetails {
     private String panNo;
 
     @OneToOne
+            (cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "emp_id")
 //    @JsonIgnore
     private Employees employees;

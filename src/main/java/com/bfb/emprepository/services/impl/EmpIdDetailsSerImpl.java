@@ -27,4 +27,9 @@ public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
     public List<EmpIdentityDetails> fetchEmployeesIdDetails() {
         return detailsRepo.findAll();
     }
+
+    @Override
+    public void deleteEmpIdDetails(Integer detailsId) {
+        detailsRepo.deleteById(detailsId);
+    }
 }

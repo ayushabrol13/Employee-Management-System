@@ -22,11 +22,6 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmployeeRepo employeeRepo;
 
-    public EmpServiceImpl(EmployeeRepo employeeRepo) {
-        super();
-        this.employeeRepo = employeeRepo;
-    }
-
     @Override
     @Cacheable(cacheNames = "employees")
     public Employees fetchEmployeeById(int eId) {

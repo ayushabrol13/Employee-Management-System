@@ -19,7 +19,13 @@ public class EmpAddressController {
     }
 
     @GetMapping("")
-    public List<EmpAddress> fetchAddresses(){
+    public List<EmpAddress> fetchAddresses() {
         return addressSer.fetchAddresses();
+    }
+
+    @DeleteMapping("/{addId}")
+    public String deleteEmpAddress(@PathVariable Integer addId){
+        addressSer.deleteEmpAddress(addId);
+        return "Address of the employee with address id "+ addId + "got deleted successfully...";
     }
 }

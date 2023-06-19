@@ -9,4 +9,6 @@ public interface EmpAddressSer {
     public EmpAddress createEmpAddress(EmpAddress address);
 
     public List<EmpAddress> fetchAddresses();
+
+    public void deleteEmpAddress(Integer addId);
 }

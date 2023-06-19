@@ -33,7 +33,9 @@ public class Employees {
     @JsonIgnore
     private EmpAddress empAddress;
 
+//    @JsonIgnore
     @ManyToOne
+            (cascade = CascadeType.ALL)
     @JoinColumn(name = "dep_id")
     private Department department;
 }

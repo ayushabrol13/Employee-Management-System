@@ -8,4 +8,6 @@ public interface EmpIdDetailsSer {
     public EmpIdentityDetails createIdDetails(EmpIdentityDetails details);
 
     public List<EmpIdentityDetails> fetchEmployeesIdDetails();
+
+    void deleteEmpIdDetails(Integer detailsId);
 }

@@ -22,4 +22,9 @@ public class EmpAddressSerImpl implements EmpAddressSer {
     public List<EmpAddress> fetchAddresses() {
         return addressRepo.findAll();
     }
+
+    @Override
+    public void deleteEmpAddress(Integer addId) {
+        addressRepo.deleteById(addId);
+    }
 }

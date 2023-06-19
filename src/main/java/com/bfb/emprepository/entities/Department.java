@@ -1,5 +1,6 @@
 package com.bfb.emprepository.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,8 @@ public class Department {
     @Column(name = "designation")
     private String designation;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany (mappedBy = "department")
+    @JsonIgnore
     private List<Employees> employees = new ArrayList<>();
 
 }
