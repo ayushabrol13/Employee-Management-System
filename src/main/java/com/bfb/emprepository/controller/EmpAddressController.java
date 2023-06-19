@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/api/employees/address")
 public class EmpAddressController {
     @Autowired
     private EmpAddressSer addressSer;

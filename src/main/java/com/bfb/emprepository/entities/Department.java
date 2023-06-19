@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "departments")
 public class Department {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dep_id")
     private Integer depId;
     @Column(name = "dep_name")
@@ -29,5 +29,4 @@ public class Department {
     @OneToMany (mappedBy = "department")
     @JsonIgnore
     private List<Employees> employees = new ArrayList<>();
-
 }

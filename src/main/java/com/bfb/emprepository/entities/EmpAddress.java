@@ -21,7 +21,6 @@ public class EmpAddress {
     private String permanentAddress;
 
     @OneToOne
-            (cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "emp_id")
     private Employees employees;
 }
