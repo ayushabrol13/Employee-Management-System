@@ -9,9 +9,11 @@ import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import MainPage from "./components/MainPage";
 import LoginForm from "./components/LoginForm";
-import Sidebar from "./components/Sidebar";
-import CreateEmployeeFrontend from "./components/CreateEmployeeFrontend";
 import EmployeeDetail from "./components/EmployeeDetail";
+import CreateEmployee from "./components/CreateEmployee/CreateEmployee";
+import CreateEmployeeIdentity from "./components/CreateEmployee/CreateEmployeeIdentity";
+import CreateAddress from "./components/CreateEmployee/CreateAddress";
+import CreateEmployeeAuth from "./components/CreateEmployee/CreateEmployeeAuth";
 function App() {
   return (
       <div>
@@ -19,12 +21,15 @@ function App() {
           <HeaderComponent />
           <div className="container">
             <Routes>
-              <Route path="/all-employee" element={<ListEmployeeComponent />} />
               <Route path="/" element={<MainPage />} />
+              <Route path="/all-employee" element={<ListEmployeeComponent />} />
               <Route path="/sign-in" element={<LoginForm />} />
-              <Route path="/sign-up" element={<CreateEmployeeFrontend />} />
-              <Route path="/add-employee" element={<CreateEmployeeFrontend/>} />
               <Route path="/edit-employee" element={<EmployeeDetail/>} />
+              <Route path="/add-employee" element={<CreateEmployeeAuth/>} />
+              <Route path="/sign-up" element={<CreateEmployeeAuth />} />
+              <Route path="/sign-up-employee" element={<CreateEmployee/>}/>
+              <Route path="/sign-up-identity" element={<CreateEmployeeIdentity/>}/>
+              <Route path="/sign-up-address" element={<CreateAddress/>}/>
             </Routes>
           </div>
         </Router>
