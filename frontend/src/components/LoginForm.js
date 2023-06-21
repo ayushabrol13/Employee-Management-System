@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { motion } from 'framer-motion';
-
-const LoginForm = () => {
-  const [username, setUsername] = useState('');
+import EmployeeService from "../services/EmployeeService";
+export default function Login(){
+  const [empId, setEmpId] = useState('');
   const [password, setPassword] = useState('');
+  let originalPassword;
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  useEffect(() => {
+    EmployeeService.getEmployeeById(empId).then((response)=>{
+       originalPassword=response.data.salary;
+      console.log(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }, []);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
-  };
 
   return (
     <div style={styles.container}>
@@ -29,14 +25,26 @@ const LoginForm = () => {
         style={styles.card}
       >
         <h2 style={styles.title}>Login Form</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) =>{
+          if(originalPassword===password){
+            alert("successful login")
+            window.location.href="https://localhost:3000/all-employee";
+
+          }
+          else{
+            alert("unsuccessful login");
+            alert("wrong password");
+
+          }
+
+        }}>
           <div>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Employee Id</label>
             <input
-              type="text"
+              type="number"
               id="username"
-              value={username}
-              onChange={handleUsernameChange}
+              value={empId}
+              onChange={(e) => setEmpId(e.target.value)}
               style={styles.input}
             />
           </div>
@@ -46,7 +54,7 @@ const LoginForm = () => {
               type="password"
               id="password"
               value={password}
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
               style={styles.input}
             />
           </div>
@@ -104,4 +112,3 @@ const styles = {
   },
 };
 
-export default LoginForm;

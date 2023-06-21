@@ -1,25 +1,25 @@
 import axios from 'axios'
 const EMPLOYEE_BASE_REST_API_URL = 'http://localhost:8080/api/employees';
-
+const EMPLOYEE_BASE_REST_API_URL_IDENTITY = 'http://localhost:8080/api/employees/identity';
 class EmployeeService{
-    getAllEmployee(){
+    async getAllEmployee(){
         return axios.get(EMPLOYEE_BASE_REST_API_URL);
     }
 
-    getEmployeeById(employeeId){
+    async getEmployeeById(employeeId){
         return axios.get(EMPLOYEE_BASE_REST_API_URL + '/' + employeeId);
     }
 
-    createEmployee(employee){
+    async createEmployee(employee){
         return axios.post(EMPLOYEE_BASE_REST_API_URL,employee);
     }
-    createEmployeeIdentity(identity){
-        return axios.post(EMPLOYEE_BASE_REST_API_URL+"/identity",identity);
+    async createEmployeeIdentity(identity){
+        return axios.post(EMPLOYEE_BASE_REST_API_URL_IDENTITY,identity);
     }
-    createEmployeeAddress(address){
+    async createEmployeeAddress(address){
         return axios.post(EMPLOYEE_BASE_REST_API_URL+"/address",address);
     }
-    deleteEmployee(empId){
+    async deleteEmployee(empId){
         return axios.delete((EMPLOYEE_BASE_REST_API_URL+"/"+empId));
     }
 

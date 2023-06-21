@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 export default function EmployeeInformationCard(){
   const {id}= useParams();
   const[employee,setEmployee]=useState([]);
+  const[address,setAddress]=useState([]);
   useEffect(() => {
     EmployeeService.getEmployeeById(id).then((response)=>{
       setEmployee(response.data)
@@ -14,6 +15,17 @@ export default function EmployeeInformationCard(){
       console.log(error);
     })
   }, []);
+
+  // useEffect(() => {
+  //   EmployeeService.getAddressById(id).then((response)=>{
+  //     setAddreses(response.data)
+  //     console.log(response.data);
+  //   }).catch(error=>{
+  //     console.log(error);
+  //   })
+  // }, []);
+
+
 
   //const[empId,setEmpId]=useState(0);
   //const[name,setName]=useState('');

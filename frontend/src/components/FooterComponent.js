@@ -2,7 +2,7 @@ import React from "react";
 
 const FooterComponent = () => {
   return (
-    <footer className="footer bg-white text-center text-white fixed-bottom" >
+    <footer className="footer bg-white text-center text-white fixed-bottom" style={{zIndex:"0"}} >
       {/* Grid container */}
       <div className="container p-4 pb-0">
         {/* Section: Social media */}
