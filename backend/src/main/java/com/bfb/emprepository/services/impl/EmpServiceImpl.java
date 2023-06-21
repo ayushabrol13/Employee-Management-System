@@ -104,9 +104,15 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public String validateVerificationToken(String token) {
         VerificationToken verificationToken = verificationTokenRepo.findByToken(token);
-        if(verificationToken == null)
+        if (verificationToken == null)
             return "invalid";
         Employees emp = verificationToken.getEmployee();
+        Calendar cal = Calendar.getInstance();
 
+        if ((cal.getTime().getTime() - verificationToken.getExpirationTime().getTime()) <= 0) {
+            verificationTokenRepo.delete(verificationToken);
+            return "token expired";
+        }
+        return "valid";
     }
 }
