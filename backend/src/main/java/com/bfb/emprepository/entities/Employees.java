@@ -16,8 +16,16 @@ import lombok.NoArgsConstructor;
 public class Employees {
 
     @Id
-    @SequenceGenerator(name = "empIdGenerator")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "emp_id_seq",
+            sequenceName = "emp_id_seq",
+            allocationSize = 1,
+            initialValue = 24600
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "emp_id_seq"
+    )
     private Integer empId;
 
     @Column(name = "name", nullable = false, length = 50)
