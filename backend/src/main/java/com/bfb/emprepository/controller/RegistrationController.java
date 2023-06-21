@@ -22,7 +22,7 @@ public class RegistrationController {
                 employees,
                 applicationUrl(request)
         ));
-        return "Employee registered successfully. Please verify your your email address from the mail sent to your email id...";
+        return "Employee registered successfully. Please verify your email address from the link sent to your email id...";
     }
 
     @GetMapping("/verifyRegistration")
@@ -34,7 +34,7 @@ public class RegistrationController {
     }
 
     private String applicationUrl(HttpServletRequest request) {
-        return "http://"
+        return "https://"
                 + request.getServerName()
                 + ":"
                 + request.getServerPort()

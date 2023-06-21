@@ -22,6 +22,7 @@ public class VerificationToken {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id")
     private Employees employee;
+
     public VerificationToken(Employees employee, String token){
         super();
         this.employee = employee;

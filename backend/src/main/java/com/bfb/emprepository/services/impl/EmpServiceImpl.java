@@ -109,10 +109,9 @@ public class EmpServiceImpl implements EmpService {
         Employees emp = verificationToken.getEmployee();
         Calendar cal = Calendar.getInstance();
 
-        if ((cal.getTime().getTime() - verificationToken.getExpirationTime().getTime()) <= 0) {
-            verificationTokenRepo.delete(verificationToken);
-            return "token expired";
-        }
+        if(verificationToken.getExpirationTime().getTime() <= cal.getTime().getTime())
+            return "The generated token got expired. Kindly, generate a new one...";
+      
         return "valid";
     }
 }
