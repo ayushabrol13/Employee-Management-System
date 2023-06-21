@@ -68,6 +68,7 @@ public class EmpServiceImpl implements EmpService {
 
 
     @Override
+    @CachePut(cacheNames = "employees", key = "#eId") //(eId needed or not)
     public Employees updateEmployeeById(Integer eId, Employees employees) {
         Employees emp = employeeRepo.findById(eId).get();
 

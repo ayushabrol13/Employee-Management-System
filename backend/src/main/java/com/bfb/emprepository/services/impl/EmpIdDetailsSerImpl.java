@@ -5,11 +5,15 @@ import com.bfb.emprepository.dao.EmployeeRepo;
 import com.bfb.emprepository.entities.EmpIdentityDetails;
 import com.bfb.emprepository.services.EmpIdDetailsSer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = {"empdetail"})
 public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
 
     @Autowired
@@ -18,6 +22,7 @@ public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
     private EmployeeRepo employeeRepo;
 
     @Override
+    @CachePut(cacheNames = "empdetail")
     public EmpIdentityDetails createIdDetails(EmpIdentityDetails details) {
 //        details.setEmployees(employeeRepo.getOne(details.get));
         return detailsRepo.save(details);
@@ -29,6 +34,7 @@ public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
     }
 
     @Override
+    @CacheEvict(cacheNames = "empdetail", allEntries = true)
     public void deleteEmpIdDetails(Integer detailsId) {
         detailsRepo.deleteById(detailsId);
     }
