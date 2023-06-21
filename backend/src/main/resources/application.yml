@@ -4,9 +4,9 @@ server:
 #caffeine configuration
 spring:
   cache:
-    cache-names: employees
+    cache-names: employees, departments, empdetail, address
     caffeine:
-      spec: maximumSize=500, expireAfterAccess=60M
+      spec: maximumSize=500, expireAfterAccess=60s
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/employee
     username: ${MYSQL_USER:root}
