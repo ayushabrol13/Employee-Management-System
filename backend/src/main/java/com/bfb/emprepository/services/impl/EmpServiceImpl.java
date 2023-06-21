@@ -1,6 +1,8 @@
 package com.bfb.emprepository.services.impl;
 
 import com.bfb.emprepository.dao.EmployeeRepo;
+import com.bfb.emprepository.dao.VerificationTokenRepo;
+import com.bfb.emprepository.entities.VerificationToken;
 import com.bfb.emprepository.exceptions.DatabaseEmptyException;
 import com.bfb.emprepository.exceptions.InputFieldsEmptyException;
 import com.bfb.emprepository.exceptions.ResourceNotFoundException;
@@ -11,6 +13,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,6 +24,10 @@ public class EmpServiceImpl implements EmpService {
 
     @Autowired
     private EmployeeRepo employeeRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private VerificationTokenRepo verificationTokenRepo;
 
     @Override
     @Cacheable(cacheNames = "employees")
@@ -30,13 +37,13 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     @CachePut(cacheNames = "employees")
-    public Employees replaceEmployee(Employees employee) {
+    public Employees updateEmployee(Employees employee) {
         Employees existingEmp = new Employees();
         if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
         existingEmp.setEmpId(employee.getEmpId());
         existingEmp.setName(employee.getName());
-        existingEmp.setSalary(employee.getSalary());
+        existingEmp.setPassword(passwordEncoder.encode(employee.getPassword()));
         existingEmp.setMail(employee.getMail());
         employeeRepo.save(existingEmp);
         return existingEmp;
@@ -47,7 +54,12 @@ public class EmpServiceImpl implements EmpService {
     public Employees createEmployee(Employees employee) {
         if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
             throw new InputFieldsEmptyException();
-        return employeeRepo.save(employee);
+        Employees emp = new Employees();
+        emp.setEmpId(employee.getEmpId());
+        emp.setName(employee.getName());
+        emp.setPassword(passwordEncoder.encode(employee.getPassword()));
+        emp.setMail(employee.getMail());
+        return employeeRepo.save(emp);
     }
 
     @Override
@@ -77,9 +89,24 @@ public class EmpServiceImpl implements EmpService {
         if (Objects.nonNull(employees.getMail()) && !"".equalsIgnoreCase(employees.getMail())){
             emp.setMail(employees.getMail());
         }
-        if (Objects.nonNull(employees.getSalary()) && !"".equalsIgnoreCase(employees.getSalary().toString())){
-            emp.setSalary(employees.getSalary());
-        }
+//        if (Objects.nonNull(employees.getPassword()) && !"".equalsIgnoreCase(employees.getPassword())){
+//            emp.setPassword(employees.getPassword());
+//        }
         return employeeRepo.save(emp);
+    }
+
+    @Override
+    public void saveTokenForEmployee(String token, Employees employees) {
+        VerificationToken verificationToken = new VerificationToken(employees, token);
+        verificationTokenRepo.save(verificationToken);
+    }
+
+    @Override
+    public String validateVerificationToken(String token) {
+        VerificationToken verificationToken = verificationTokenRepo.findByToken(token);
+        if(verificationToken == null)
+            return "invalid";
+        Employees emp = verificationToken.getEmployee();
+
     }
 }

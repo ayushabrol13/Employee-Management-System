@@ -11,4 +11,5 @@ import java.util.List;
 public interface EmployeeRepo extends JpaRepository<Employees, Integer> {
 
 //    public List<Employees> findByDepartmentIgnoreCase(String dep);
+    public Employees findByMailIgnoreCase(String mail);
 }

@@ -3,27 +3,43 @@ package com.bfb.emprepository.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "employeeData")
 public class Employees {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer empId;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "mail")
+    @Column(name = "mail", unique = true)
     private String mail;
 
-    @Column(name = "salary")
-    private Integer salary;
+    @Column(name = "password", length = 60)
+    private String password;
+
+    @Column(name = "role", nullable = true)
+    private String role;
+
+    @PrePersist
+    @PreUpdate
+    private void calculateRole(){
+        String domain = mail.split("@")[1];
+        if(domain.equalsIgnoreCase("ninjacart.com"))
+            this.role = "ROLE_ADMIN";
+        else
+            this.role = "ROLE_EMPLOYEE";
+    }
 
     @OneToOne(mappedBy = "employees", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

@@ -13,9 +13,9 @@ public class EmpIdentityDetails {
     @GeneratedValue
     @Column(name = "details_id")
     private Integer detailsId;
-    @Column(name = "aadhar_no", nullable = false, length = 12)
+    @Column(name = "aadhar_no", nullable = false, length = 12, unique = true)
     private String aadharNo;
-    @Column(name = "pan_no", nullable = false, length = 10)
+    @Column(name = "pan_no", nullable = false, length = 10, unique = true)
     private String panNo;
 
     @OneToOne
