@@ -29,4 +29,9 @@ public class EmpIdDetailsController {
         ser.deleteEmpIdDetails(detailsId);
         return "Employee Identity Details with id "+ detailsId +"got deleted successfully...";
     }
+
+    @GetMapping("/{eId}")
+    public EmpIdentityDetails fetchEmpIdDetailsById(@PathVariable("eId") Integer id){
+        return ser.fetchEmpIdDetailsById(id);
+    }
 }

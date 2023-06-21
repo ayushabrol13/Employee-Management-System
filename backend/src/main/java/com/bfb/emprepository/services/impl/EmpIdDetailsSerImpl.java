@@ -32,4 +32,10 @@ public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
     public void deleteEmpIdDetails(Integer detailsId) {
         detailsRepo.deleteById(detailsId);
     }
+
+    @Override
+    public EmpIdentityDetails fetchEmpIdDetailsById(Integer id) {
+        EmpIdentityDetails details = detailsRepo.findById(id).get();
+        return details;
+    }
 }
