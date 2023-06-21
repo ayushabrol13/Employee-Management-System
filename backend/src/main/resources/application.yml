@@ -8,9 +8,9 @@ spring:
     caffeine:
       spec: maximumSize=500, expireAfterAccess=60M
   datasource:
-    url: jdbc:mysql://localhost:3306/employee
-    username: root
-    password: password
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/employee
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
