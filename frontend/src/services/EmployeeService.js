@@ -19,6 +19,9 @@ class EmployeeService{
     createEmployeeAddress(address){
         return axios.post(EMPLOYEE_BASE_REST_API_URL+"/address",address);
     }
+    deleteEmployee(empId){
+        return axios.delete((EMPLOYEE_BASE_REST_API_URL+"/"+empId));
+    }
 
 
 }
