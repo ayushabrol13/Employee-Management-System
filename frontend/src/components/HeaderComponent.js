@@ -4,13 +4,13 @@ const HeaderComponent = () => {
   return (
     <div>
         <header>
-            <nav className="navbar navbar-light bg-light">
+            <nav className="navbar navbar-light bg-light ">
                 <div>
                     <a href='https://ninjacart.in/'>
-                        <img className='ninjacart-logo' src="https://ninjacart.in/images/logo.png"></img>
+                        <img className='ninjacart-logo mx-3' src="https://ninjacart.in/images/logo.png"></img>
                     </a>
                 </div>
-                <h1 style={styles.heading} >Storm-Breaker</h1>
+                <h1 className="mx-3" style={styles.heading} >StormBreaker</h1>
             </nav>
         </header>
     </div>
@@ -23,7 +23,8 @@ const styles = {
         fontfamily: 'Poppins',
       fontSize: '24px',
       fontWeight: 'bold',
-      margin: '12px'
+      margin: '12px',
+        paddingLeft:'5%'
     }
   };
 export default HeaderComponent
