@@ -43,8 +43,8 @@ public class EmpRepositoryApplication implements CommandLineRunner {
         if((employeeRepo.findByMailIgnoreCase("bfb@ninjacart.com")) == null) {
 //            Department department = Department.builder()
 //                    .depId(0)
-//                    .depName("Paatal Lok")
-//                    .designation("Cheeranjivi")
+//                    .depName("Thunder World")
+//                    .designation("Storm Breaker")
 //                    .build();
 //            departmentRepo.save(department);
 

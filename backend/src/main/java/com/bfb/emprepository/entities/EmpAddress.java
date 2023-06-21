@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Table(name = "empAddress")
 public class EmpAddress {
     @Id
-    @GeneratedValue
-    private Integer addressId;
+    private Integer empId;
     private String localAddress;
     private String permanentAddress;
 
     @OneToOne
-    @JoinColumn(name = "emp_id")
+    @PrimaryKeyJoinColumn(name = "emp_id")
     private Employees employees;
 }
