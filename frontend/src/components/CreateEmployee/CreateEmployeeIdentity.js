@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+//import {identity as EmpDetails} from './CreateEmployeeAuth';
 import {Link} from 'react-router-dom';
 export default function CreateEmployeeIdentity(){
     const [aadharNo,setAadhar]= useState('');
@@ -6,7 +7,7 @@ export default function CreateEmployeeIdentity(){
 
     const saveEmployeeIdentity =(e)=>{
         e.preventDefault();
-
+        //console.log(EmpDetails)
         const identity={aadharNo,panNo};
         console.log(identity);
         window.location.href = "http://localhost:3000/sign-up-address";

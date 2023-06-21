@@ -1,13 +1,25 @@
-import React, {useState} from 'react';
-
+import React, {useEffect, useState} from 'react';
+import EmployeeService from "../../services/EmployeeService";
+import {useParams} from "react-router-dom";
 
 
 export default function EmployeeInformationCard(){
-  const[empId,setEmpId]=useState(0);
-  const[name,setName]=useState('');
-  const[email,setEmail]=useState('');
-  const[localAddress,setLocalAddress]=useState('');
-  const[permanentAddress,setPermanentAddress]=useState('');
+  const {id}= useParams();
+  const[employee,setEmployee]=useState([]);
+  useEffect(() => {
+    EmployeeService.getEmployeeById(id).then((response)=>{
+      setEmployee(response.data)
+      console.log(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }, []);
+
+  //const[empId,setEmpId]=useState(0);
+  //const[name,setName]=useState('');
+  //const[email,setEmail]=useState('');
+  //const[localAddress,setLocalAddress]=useState('');
+  //const[permanentAddress,setPermanentAddress]=useState('');
 
 
   return(
@@ -19,7 +31,7 @@ export default function EmployeeInformationCard(){
                 <p className="mb-0">Employee ID</p>
               </div>
               <div className="col-sm-9">
-                <p className="text-muted mb-0">{empId} </p>
+                <p className="text-muted mb-0">{employee.empId} </p>
               </div>
             </div>
             <hr />
@@ -28,7 +40,7 @@ export default function EmployeeInformationCard(){
                 <p className="mb-0">Full Name</p>
               </div>
               <div className="col-sm-9">
-                <p className="text-muted mb-0">{name}</p>
+                <p className="text-muted mb-0">{employee.name}</p>
               </div>
             </div>
             <hr />
@@ -37,7 +49,7 @@ export default function EmployeeInformationCard(){
                 <p className="mb-0">Email</p>
               </div>
               <div className="col-sm-9">
-                <p className="text-muted mb-0">{email}</p>
+                <p className="text-muted mb-0">{employee.mail}</p>
               </div>
             </div>
            
@@ -47,7 +59,7 @@ export default function EmployeeInformationCard(){
                 <p className="mb-0">Local Address</p>
               </div>
               <div className="col-sm-9">
-                <p className="text-muted mb-0">{localAddress}</p>
+                <p className="text-muted mb-0">{employee.localAddress}</p>
               </div>
             </div>
             <hr />
@@ -56,7 +68,7 @@ export default function EmployeeInformationCard(){
                 <p className="mb-0">Permanent Address</p>
               </div>
               <div className="col-sm-9">
-                <p className="text-muted mb-0">{permanentAddress}</p>
+                <p className="text-muted mb-0">{employee.permanentAddress}</p>
               </div>
             </div>
           </div>

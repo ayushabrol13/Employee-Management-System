@@ -1,16 +1,30 @@
-import { Link } from "react-router-dom";
-import React,{useState} from 'react';
+import {Link, useParams} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import EmployeeService from "../../services/EmployeeService";
 
 export default function EmployeeProfileCard() {
     const[name,setName]=useState('');
     const[department,setDepartmen]=useState('');
     const[localAddress,setLocalAddress]=useState('');
 
+
+
+
+    const {id}= useParams();
+    const[employee,setEmployee]=useState([]);
+    useEffect(() => {
+        EmployeeService.getEmployeeById(id).then((response)=>{
+            setEmployee(response.data)
+            console.log(response.data);
+        }).catch(error=>{
+            console.log(error);
+        })
+    }, []);
     return (
         <div className="col-lg-4">
             <div className="card mb-4">
                 <div className="card-body text-center">
-                    <h5 className="my-3">{name}</h5>
+                    <h5 className="my-3">{employee.name}</h5>
                     <p className="text-muted mb-1">{department}</p>
                     <p className="text-muted mb-4">{localAddress}</p>
                     <div className="d-flex justify-content-center mb-2">
