@@ -33,6 +33,9 @@ public class EmpAddressController {
 
     @GetMapping("/{eId}")
     public EmpAddress fetchEmpAddressById(@PathVariable("eId") Integer id){
-        return addressSer.fetchEmpAddressById(id);
+        return addressSer.fetchEmpAddressById(id);}
+    @PutMapping("")
+    public EmpAddress updateEmpAddress(@RequestBody EmpAddress address) {
+        return addressSer.createEmpAddress(address);
     }
 }
