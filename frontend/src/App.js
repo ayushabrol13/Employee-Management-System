@@ -11,6 +11,7 @@ import MainPage from "./components/MainPage";
 import LoginForm from "./components/LoginForm";
 import EmployeeDetail from "./components/EmployeeDetail";
 import CreateEmployeeAuth from "./components/CreateEmployee/CreateEmployeeAuth";
+import EditEmployeeComponent from "./components/EditEmployeeComponent";
 function App() {
   return (
       <div>
@@ -24,6 +25,7 @@ function App() {
               <Route path="/view-employee/:id" element={<EmployeeDetail/>} />
               <Route path="/add-employee" element={<CreateEmployeeAuth/>} />
               <Route path="/sign-up" element={<CreateEmployeeAuth />} />
+                <Route path="/update-form" element={<EditEmployeeComponent />} />
             </Routes>
           </div>
         </Router>

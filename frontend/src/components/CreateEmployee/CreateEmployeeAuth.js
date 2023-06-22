@@ -1,9 +1,8 @@
 import React,{useState} from "react";
-import {Link} from 'react-router-dom';
 import EmployeeService from "../../services/EmployeeService";
 export default function CreateEmployeeAuth(){
     const [mail,setEmail]= useState('');
-    const [salary,setPassword]=useState('');
+    const [password,setPassword]=useState('');
     const[name,setName]=useState('');
     const[empId,setEmpId]=useState(0);
 
@@ -15,11 +14,13 @@ export default function CreateEmployeeAuth(){
     console.log(panNo+" "+aadharNo);
     const saveEmployeeAuth =async (e) => {
         e.preventDefault();
-        const employee = {empId, name, mail, salary, department};
+        const employee = {empId, name, mail, password, department};
         const employees = {"empId": empId};
-        const identity = {panNo, aadharNo, employees};
-        const address = {localAddress, permanentAddress, employees};
-        await EmployeeService.createEmployee(employee);
+        const identity = {empId,panNo, aadharNo, employee};
+        const address = {empId,localAddress, permanentAddress, employee};
+        await EmployeeService.createEmployee(employee).then((response)=>{
+            setEmpId(response.data.empId);
+        });
         await EmployeeService.createEmployeeIdentity(identity);
         await EmployeeService.createEmployeeAddress(address);
         alert("successfull");
@@ -50,11 +51,11 @@ export default function CreateEmployeeAuth(){
                                 <div className="form-group mb-2">
                                     <label className="form-label">Password</label>
                                     <input
-                                        type="number"
+                                        type="password"
                                         placeholder="Enter the password"
-                                        name="salary"
+                                        name="password"
                                         className="form-control"
-                                        value={salary}
+                                        value={password}
                                         required="true"
                                         onChange={(e) => setPassword(e.target.value)}
                                     >
@@ -75,20 +76,20 @@ export default function CreateEmployeeAuth(){
                                     </input>
 
                                 </div>
-                                <div className="form-group mb-2">
-                                    <label className="form-label">Employee Id</label>
-                                    <input
-                                        type="number"
-                                        placeholder="Enter the employee id"
-                                        name="empid"
-                                        className="form-control"
-                                        value={empId}
-                                        required="true"
-                                        onChange={(e) => setEmpId(e.target.value)}
-                                    >
-                                    </input>
+                                {/*<div className="form-group mb-2">*/}
+                                {/*    <label className="form-label">Employee Id</label>*/}
+                                {/*    <input*/}
+                                {/*        type="number"*/}
+                                {/*        placeholder="Enter the employee id"*/}
+                                {/*        name="empid"*/}
+                                {/*        className="form-control"*/}
+                                {/*        value={empId}*/}
+                                {/*        required="true"*/}
+                                {/*        onChange={(e) => setEmpId(e.target.value)}*/}
+                                {/*    >*/}
+                                {/*    </input>*/}
 
-                                </div>
+                                {/*</div>*/}
                                 <div className="form-group mb-2">
                                     <label className="form-label">Aadhar Number</label>
                                     <input

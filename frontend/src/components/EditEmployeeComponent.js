@@ -1,17 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-import EmployeeService from "../../services/EmployeeService";
-import { useParams } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useRoutes } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import EmployeeService from "../services/EmployeeService";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function EditEmployeeComponent() {
@@ -25,7 +17,7 @@ export default function EditEmployeeComponent() {
     const [localAddress, setLocalAddress] = useState('');
     const [permanentAddress, setPermanentAddress] = useState('');
     const [empId, setEmpId] = useState(0);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const updateEmployeeAuth = (e) => {
         e.preventDefault();
@@ -37,7 +29,7 @@ export default function EditEmployeeComponent() {
         EmployeeService.updateEmployeeIdentity(identity);
         EmployeeService.updateEmployeeAddress(address);
         alert("successfull");
-        history.push("/employees");
+        navigate.push("/employees");
     }
     useEffect(() => {
         EmployeeService.getEmployeeById(empId).then((res) => {

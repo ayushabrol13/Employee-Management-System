@@ -26,9 +26,9 @@ export const ListEmployeeComponent = () => {
         <table className='table table-bordered table-striped'>
             <thead>
                 <th>Employee ID</th>
-                <th>Employee Email</th>
-                <th>Employee Name</th>
-                <th>Employee Salary</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Designation</th>
                 <th>Actions</th>
             </thead>
             { <tbody>
@@ -39,7 +39,7 @@ export const ListEmployeeComponent = () => {
                             <td>{employee.empId}</td>
                             <td>{employee.mail}</td>
                             <td>{employee.name}</td>
-                            <td>{employee.salary}</td>
+                            <td>{employee.department.designation}</td>
                             <td>
                                 <Link className="btn btn-info" to={`/edit-employee/${employee.empId}`}>View</Link>
                                 <button className="btn btn-danger" style={{marginLeft:"5%"}} onClick={(e)=> saveEmployeeAuth(e,employee.empId) }>Delete</button>
