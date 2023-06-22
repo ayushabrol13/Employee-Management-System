@@ -11,6 +11,5 @@ public interface EmpService {
     public Employees replaceEmployee(Employees employee);
     public String deleteEmployee(int empId);
     public List<Employees> fetchEmployees();
-
     public Employees updateEmployeeById(Integer eId, Employees employees);
 }

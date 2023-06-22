@@ -38,4 +38,13 @@ public class EmpIdDetailsSerImpl implements EmpIdDetailsSer {
         EmpIdentityDetails details = detailsRepo.findById(id).get();
         return details;
     }
+
+    @Override
+    public EmpIdentityDetails updateEmployeeIdentity(EmpIdentityDetails details) {
+        EmpIdentityDetails existingDetails = detailsRepo.findById(details.getEmpId()).orElse(null);
+        existingDetails.setAadharNo(details.getAadharNo());
+        existingDetails.setPanNo(details.getPanNo());
+        existingDetails.setEmployees(details.getEmployees());
+        return detailsRepo.save(existingDetails);
+    }
 }

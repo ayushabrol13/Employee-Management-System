@@ -35,4 +35,8 @@ public class EmpIdDetailsController {
     public EmpIdentityDetails fetchEmpIdDetailsById(@PathVariable("eId") Integer id){
         return ser.fetchEmpIdDetailsById(id);
     }
+    @PutMapping("")
+    public EmpIdentityDetails updateEmpIdDetails(@RequestBody EmpIdentityDetails details) {
+        return ser.createIdDetails(details);
+    }
 }
