@@ -15,7 +15,6 @@ class EmployeeService{
         return axios.get(EMPLOYEE_BASE_REST_API_URL+"/identity/"+employeeId);
     }
 
-
     async getEmployeeAddressbyId(employeeId){
         return axios.get(EMPLOYEE_BASE_REST_API_URL+"/address/"+employeeId);
     }

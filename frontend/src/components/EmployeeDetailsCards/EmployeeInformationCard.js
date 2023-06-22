@@ -14,6 +14,7 @@ export default function EmployeeInformationCard(){
     }).catch(error=>{
       console.log(error);
     });
+
     EmployeeService.getEmployeeAddressbyId(id).then((response) => {
       setAddress(response.data);
     }).catch(error=>{

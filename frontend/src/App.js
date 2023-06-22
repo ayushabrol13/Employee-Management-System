@@ -21,7 +21,7 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/all-employee" element={<ListEmployeeComponent />} />
               <Route path="/sign-in" element={<LoginForm />} />
-              <Route path="/edit-employee/:id" element={<EmployeeDetail/>} />
+              <Route path="/view-employee/:id" element={<EmployeeDetail/>} />
               <Route path="/add-employee" element={<CreateEmployeeAuth/>} />
               <Route path="/sign-up" element={<CreateEmployeeAuth />} />
             </Routes>
