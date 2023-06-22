@@ -11,9 +11,15 @@ import MainPage from "./components/MainPage";
 import LoginForm from "./components/LoginForm";
 import EmployeeDetail from "./components/EmployeeDetail";
 import CreateEmployeeAuth from "./components/CreateEmployee/CreateEmployeeAuth";
+import Banner from './components/banner_img2.jpeg';
 function App() {
   return (
-      <div>
+      <div className="wholeProject" style={{
+          backgroundImage: `url(${Banner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+      }}
+      >
         <Router>
           <HeaderComponent />
           <div className="container">
