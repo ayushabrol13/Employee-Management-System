@@ -10,4 +10,6 @@ public interface EmpIdDetailsSer {
     public List<EmpIdentityDetails> fetchEmployeesIdDetails();
 
     void deleteEmpIdDetails(Integer detailsId);
+
+    public EmpIdentityDetails fetchEmpIdDetailsById(Integer id);
 }

@@ -11,4 +11,6 @@ public interface EmpAddressSer {
     public List<EmpAddress> fetchAddresses();
 
     public void deleteEmpAddress(Integer addId);
+
+    public EmpAddress fetchEmpAddressById(Integer id);
 }

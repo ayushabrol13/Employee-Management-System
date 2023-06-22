@@ -27,18 +27,16 @@ public class Employees {
             generator = "emp_id_seq"
     )
     private Integer empId;
-
     @Column(name = "name", nullable = false, length = 50)
     private String name;
-
     @Column(name = "mail", unique = true)
     private String mail;
-
     @Column(name = "password", length = 60)
     private String password;
-
     @Column(name = "role", nullable = true)
     private String role;
+    private boolean enabled = false;
+
 
     @PrePersist
     @PreUpdate

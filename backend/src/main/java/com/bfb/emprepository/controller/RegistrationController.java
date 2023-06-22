@@ -15,6 +15,11 @@ public class RegistrationController {
     @Autowired
     private ApplicationEventPublisher publisher;
 
+    @GetMapping("/hello")
+    public String helloWorld(){
+        return "Hey there! Welcome to the Employee Management System made by Brute Force Bandits...";
+    }
+
     @PostMapping("/register")
     public String registerEmployee(@RequestBody Employees employees, final HttpServletRequest request){
         empService.createEmployee(employees);

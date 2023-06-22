@@ -33,4 +33,9 @@ public class EmpAddressSerImpl implements EmpAddressSer {
     public void deleteEmpAddress(Integer addId) {
         addressRepo.deleteById(addId);
     }
+
+    @Override
+    public EmpAddress fetchEmpAddressById(Integer id) {
+        return addressRepo.findById(id).get();
+    }
 }

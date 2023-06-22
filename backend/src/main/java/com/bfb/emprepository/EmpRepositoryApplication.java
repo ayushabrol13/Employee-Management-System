@@ -39,41 +39,44 @@ public class EmpRepositoryApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        System.out.println(employeeRepo.findByMailIgnoreCase("bfb@ninjacart.com").toString());
-
+        Department d1 = new Department();
+        if(departmentRepo.findByDesignation("SDE") == null) {
+            d1 = Department.builder().depId(1).depName("Information Technology").designation("SDE").build();
+            departmentRepo.save(d1);
+            Department d2 = Department.builder().depId(2).depName("Information Technology").designation("Architect").build();
+            departmentRepo.save(d2);
+            Department d3 = Department.builder().depId(3).depName("Human Resource").designation("HR").build();
+            departmentRepo.save(d3);
+            Department d4 = Department.builder().depId(4).depName("Resource & Development").designation("R&D").build();
+            departmentRepo.save(d4);
+            Department d5 = Department.builder().depId(5).depName("Sales & Distribution").designation("S&D").build();
+            departmentRepo.save(d5);
+        }
         if((employeeRepo.findByMailIgnoreCase("bfb@ninjacart.com")) == null) {
-//            Department department = Department.builder()
-//                    .depId(0)
-//                    .depName("Thunder World")
-//                    .designation("Storm Breaker")
-//                    .build();
-//            departmentRepo.save(department);
-
             Employees employees = Employees.builder()
-                    .empId(1430)
+                    .empId(24600)
                     .name("Brute Force Bandits")
                     .mail("bfb@ninjacart.com")
                     .password(passwordEncoder.encode("admin"))
                     .role("ROLE_EMPLOYEE")
-//                  .department(department)
+                    .department(d1)
                     .build();
             employeeRepo.save(employees);
 
-//            EmpIdentityDetails empIdentityDetails = EmpIdentityDetails.builder()
-//                    .detailsId(0)
-//                    .aadharNo("123456789012")
-//                    .panNo("1234567890")
-//                    .employees(employees)
-//                    .build();
-//
-//            EmpAddress address = EmpAddress.builder()
-//                    .addressId(0)
-//                    .localAddress("Heaven")
-//                    .permanentAddress("Heaven Square")
-//                    .employees(employees)
-//                    .build();
-//
-//            idDetailsRepo.save(empIdentityDetails);
-//            addressRepo.save(address);
+            EmpIdentityDetails empIdentityDetails = EmpIdentityDetails.builder()
+                    .empId(24600)
+                    .aadharNo("123456789012")
+                    .panNo("1234567890")
+                    .build();
+
+            EmpAddress address = EmpAddress.builder()
+                    .empId(24600)
+                    .localAddress("Heaven")
+                    .permanentAddress("Heaven Square")
+                    .build();
+
+            idDetailsRepo.save(empIdentityDetails);
+            addressRepo.save(address);
         }
     }
 }
