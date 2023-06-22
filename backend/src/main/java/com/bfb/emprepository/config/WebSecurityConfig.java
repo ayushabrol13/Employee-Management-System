@@ -20,10 +20,10 @@ public class WebSecurityConfig {
                     .csrf().disable()
                     .cors().disable()
                     .authorizeHttpRequests(authorize -> authorize
-                            .requestMatchers(WHITE_LIST_URLS).permitAll()
-                            .requestMatchers("/employees/**").hasRole("EMPLOYEE")
-                            .requestMatchers("/api/**").hasRole("ADMIN")
-                            .anyRequest().authenticated()
+//                            .requestMatchers(WHITE_LIST_URLS).permitAll()
+//                            .requestMatchers("/employees/**").hasRole("EMPLOYEE")
+//                            .requestMatchers("/api/**").hasRole("ADMIN")
+                            .anyRequest().permitAll()
                     )
                     .httpBasic(Customizer.withDefaults())
 //                    .formLogin(formLogin -> formLogin

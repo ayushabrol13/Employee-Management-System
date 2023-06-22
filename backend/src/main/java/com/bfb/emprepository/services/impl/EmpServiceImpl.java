@@ -52,7 +52,7 @@ public class EmpServiceImpl implements EmpService {
     @Override
     @CachePut(cacheNames = "employees")
     public Employees createEmployee(Employees employee) {
-        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("") || employee.getPassword().equals(""))
             throw new InputFieldsEmptyException();
         Employees emp = new Employees();
         emp.setEmpId(employee.getEmpId());

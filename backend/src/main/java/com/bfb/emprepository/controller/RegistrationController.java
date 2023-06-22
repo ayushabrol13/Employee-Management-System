@@ -22,9 +22,9 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String registerEmployee(@RequestBody Employees employees, final HttpServletRequest request){
-        empService.createEmployee(employees);
+        Employees emp = empService.createEmployee(employees);
         publisher.publishEvent(new RegistrationCompleteEvent(
-                employees,
+                emp,
                 applicationUrl(request)
         ));
         return "Employee registered successfully. Please verify your email address from the link sent to your email id...";
