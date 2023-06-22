@@ -1,20 +1,46 @@
 import React, {useEffect, useState} from 'react';
 import { motion } from 'framer-motion';
 import EmployeeService from "../services/EmployeeService";
+import LoginService from "../services/LoginService";
 export default function Login(){
   const [empId, setEmpId] = useState('');
   const [password, setPassword] = useState('');
+  const[flag,setFlag]=useState(false);
+  const [employee,setEmployee]=useState([]);
   let originalPassword;
 
-  useEffect(() => {
-    EmployeeService.getEmployeeById(empId).then((response)=>{
-       originalPassword=response.data.salary;
-      console.log(response.data);
-    }).catch(error=>{
-      console.log(error);
-    })
-  }, []);
 
+  // function  SetValue() {
+  //   console.log(empId);
+  //   useEffect(() => {
+  //     EmployeeService.getEmployeeById(empId).then((response) => {
+  //       console.log("ok");
+  //       setEmployee(response.data);
+  //       originalPassword = employee;
+  //       console.log(response.data);
+  //     }).catch(error => {
+  //       console.log(error);
+  //     })
+  //
+  //   }, []);
+  // }
+
+
+  // const setResponseValue = () => {
+  //   if(empId)
+  //   EmployeeService.getEmployeeById(empId).then((response) => {
+  //       setEmployee(response.data);
+  //       originalPassword = employee;
+  //       console.log(response.data);
+  //     }).catch(error => {
+  //       console.log(error);
+  //     })
+  //
+  // }
+  //
+  // useEffect(() => {
+  //   setResponseValue();
+  // }, []);
 
   return (
     <div style={styles.container}>
@@ -25,19 +51,7 @@ export default function Login(){
         style={styles.card}
       >
         <h2 style={styles.title}>Login Form</h2>
-        <form onSubmit={(e) =>{
-          if(originalPassword===password){
-            alert("successful login")
-            window.location.href="https://localhost:3000/all-employee";
-
-          }
-          else{
-            alert("unsuccessful login");
-            alert("wrong password");
-
-          }
-
-        }}>
+        <form >
           <div>
             <label htmlFor="username">Employee Id</label>
             <input
@@ -58,14 +72,17 @@ export default function Login(){
               style={styles.input}
             />
           </div>
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+          <button
+            type=""
+           // whileHover={{ scale: 1.1 }}
+            //whileTap={{ scale: 0.9 }}
             style={styles.button}
+            onClick={(e) =>{
+              LoginService.getEmployeeById(empId,password)
+            }}
           >
             Login
-          </motion.button>
+          </button>
         </form>
       </motion.div>
     </div>

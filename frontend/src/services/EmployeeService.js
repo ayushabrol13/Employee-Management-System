@@ -22,6 +22,13 @@ class EmployeeService{
     async deleteEmployee(empId){
         return axios.delete((EMPLOYEE_BASE_REST_API_URL+"/"+empId));
     }
+    async getEmployeeIdentitybyId(employeeId){
+        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/identity/"+employeeId);
+    }
+    async getEmployeeAddressbyId(employeeId){
+        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/address/"+employeeId);
+    }
+
 
 
 }
