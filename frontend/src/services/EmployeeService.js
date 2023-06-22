@@ -10,6 +10,16 @@ class EmployeeService{
         return axios.get(EMPLOYEE_BASE_REST_API_URL + '/' + employeeId);
     }
 
+
+    async getEmployeeIdentitybyId(employeeId){
+        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/identity/"+employeeId);
+    }
+
+
+    async getEmployeeAddressbyId(employeeId){
+        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/address/"+employeeId);
+    }
+
     async createEmployee(employee){
         return axios.post(EMPLOYEE_BASE_REST_API_URL,employee);
     }
@@ -22,12 +32,7 @@ class EmployeeService{
     async deleteEmployee(empId){
         return axios.delete((EMPLOYEE_BASE_REST_API_URL+"/"+empId));
     }
-    async getEmployeeIdentitybyId(employeeId){
-        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/identity/"+employeeId);
-    }
-    async getEmployeeAddressbyId(employeeId){
-        return axios.get(EMPLOYEE_BASE_REST_API_URL+"/address/"+employeeId);
-    }
+
 
 
 

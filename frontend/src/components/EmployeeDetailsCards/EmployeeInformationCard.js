@@ -10,9 +10,9 @@ export default function EmployeeInformationCard(){
   useEffect(() => {
     EmployeeService.getEmployeeById(id).then((response)=>{
       setEmployee(response.data)
-      alert(response.data);
+      console.log(response.data);
     }).catch(error=>{
-      alert(error);
+      console.log(error);
     });
     EmployeeService.getEmployeeAddressbyId(id).then((response) => {
       setAddress(response.data);

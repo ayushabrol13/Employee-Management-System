@@ -24,6 +24,7 @@ export default function EmployeeProfileCard() {
         <div className="col-lg-4">
             <div className="card mb-4">
                 <div className="card-body text-center">
+                    <i className="fa fa-user fa-5x"></i>
                     <h5 className="my-3">{employee.name}</h5>
                     <p className="text-muted mb-1">{department}</p>
                     <p className="text-muted mb-4">{localAddress}</p>
