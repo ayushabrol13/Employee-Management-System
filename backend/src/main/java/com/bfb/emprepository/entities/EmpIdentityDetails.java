@@ -10,16 +10,16 @@ import lombok.*;
 @Table(name = "emp_identity_details")
 public class EmpIdentityDetails {
     @Id
-    @GeneratedValue
-    @Column(name = "details_id")
-    private Integer detailsId;
+    @Column(name = "emp_id")
+    private Integer empId;
     @Column(name = "aadhar_no", nullable = false, length = 12)
     private String aadharNo;
     @Column(name = "pan_no", nullable = false, length = 10)
     private String panNo;
 
     @OneToOne
-    @JoinColumn(name = "emp_id")
+//    @JoinColumn(name = "emp_id")
 //    @JsonIgnore
+    @PrimaryKeyJoinColumn(name = "emp_id")
     private Employees employees;
 }
