@@ -1,29 +1,43 @@
-import React,{useState} from "react";
-import {Link} from 'react-router-dom';
+import React, {useEffect, useState} from "react";
 import EmployeeService from "../../services/EmployeeService";
 export default function CreateEmployeeAuth(){
     const [mail,setEmail]= useState('');
-    const [salary,setPassword]=useState('');
+    const [password,setPassword]=useState('');
     const[name,setName]=useState('');
     const[empId,setEmpId]=useState(0);
 
     const [aadharNo,setAadhar]= useState('');
     const [panNo,setPan]=useState('');
-    const department={depId:2};
+    const[depId,setDepId]=useState(0);
     const [localAddress,setLocalAddress]= useState('');
     const [permanentAddress,setPermanentAddress]=useState('');
-    console.log(panNo+" "+aadharNo);
+    const [departments,setDepartments]=useState([{}]);
+
+    useEffect( () => {
+        EmployeeService.getDepartment().then((response)=>{
+            setDepartments(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+
+    },[]);
     const saveEmployeeAuth =async (e) => {
+
+
+
         e.preventDefault();
-        const employee = {empId, name, mail, salary, department};
-        const employees = {"empId": empId};
-        const identity = {panNo, aadharNo, employees};
-        const address = {localAddress, permanentAddress, employees};
-        await EmployeeService.createEmployee(employee);
+        const department={depId};
+        const employee = {empId, name, mail, password, department};
+        const identity = {empId,panNo, aadharNo, employee};
+        const address = {empId,localAddress, permanentAddress, employee};
+        await EmployeeService.createEmployee(employee).then((response)=>{
+            setEmpId(response.data.empId);
+        });
         await EmployeeService.createEmployeeIdentity(identity);
         await EmployeeService.createEmployeeAddress(address);
         alert("successfull");
     }
+    const dep_items= departments.map((dep)=> <option value={dep.depId}>{dep.depId} - {dep.designation} {dep.depName}</option>)
 
     return(
         <div>
@@ -50,11 +64,11 @@ export default function CreateEmployeeAuth(){
                                 <div className="form-group mb-2">
                                     <label className="form-label">Password</label>
                                     <input
-                                        type="number"
+                                        type="password"
                                         placeholder="Enter the password"
-                                        name="salary"
+                                        name="password"
                                         className="form-control"
-                                        value={salary}
+                                        value={password}
                                         required="true"
                                         onChange={(e) => setPassword(e.target.value)}
                                     >
@@ -76,19 +90,23 @@ export default function CreateEmployeeAuth(){
 
                                 </div>
                                 <div className="form-group mb-2">
-                                    <label className="form-label">Employee Id</label>
-                                    <input
-                                        type="number"
-                                        placeholder="Enter the employee id"
-                                        name="empid"
-                                        className="form-control"
-                                        value={empId}
-                                        required="true"
-                                        onChange={(e) => setEmpId(e.target.value)}
-                                    >
-                                    </input>
+                                    <label className="form-label">Department Id  -</label>
+                                    <select
+                                    //     name="empid"
+                                    //     className="form-control"
+                                       value={depId}
+                                    //     required="true"
+                                       onChange={(e) => setDepId(e.target.value)}
+                                    // >
+                                        >
+                                        {dep_items}
+                                    </select>
 
                                 </div>
+
+
+
+
                                 <div className="form-group mb-2">
                                     <label className="form-label">Aadhar Number</label>
                                     <input

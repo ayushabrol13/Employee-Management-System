@@ -32,8 +32,8 @@ public class Employees {
     @Column(name = "mail")
     private String mail;
 
-    @Column(name = "salary")
-    private Integer salary;
+    @Column(name = "password")
+    private String password;
 
     @OneToOne(mappedBy = "employees", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

@@ -1,67 +1,69 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-import EmployeeService from "../../services/EmployeeService";
-import { useParams } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useRoutes } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import EmployeeService from "../services/EmployeeService";
+import { useParams} from "react-router-dom";
+
 
 
 export default function EditEmployeeComponent() {
+    const {id}= useParams();
     const [mail, setEmail] = useState('');
-    const [salary, setPassword] = useState('');
+    const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
     const [aadharNo, setAadhar] = useState('');
     const [panNo, setPan] = useState('');
-    const department = { depId: 2 };
+    const[depId,setDepId]=useState(0);
     const [localAddress, setLocalAddress] = useState('');
     const [permanentAddress, setPermanentAddress] = useState('');
-    const [empId, setEmpId] = useState(0);
-    const history = useHistory();
+    const [departments,setDepartments]=useState([{}]);
 
-    const updateEmployeeAuth = (e) => {
+
+    const updateEmployeeAuth = async (e) => {
         e.preventDefault();
-        const employee = { empId, name, mail, salary, department };
-        const identity = { empId, panNo, aadharNo };
-        const address = { empId, localAddress, permanentAddress };
+        const department={depId};
+        const empId=parseInt(id);
+        const employee = {empId, name, mail, password, department};
+        const identity = {empId, panNo, aadharNo,employee};
+        const address = {empId, localAddress, permanentAddress,employee};
 
-        EmployeeService.updateEmployee(employee);
-        EmployeeService.updateEmployeeIdentity(identity);
-        EmployeeService.updateEmployeeAddress(address);
+        await EmployeeService.updateEmployee(employee).then().catch(error => console.log(error));
+        await EmployeeService.updateEmployeeIdentity(identity).then().catch(error => console.log(error));
+        await EmployeeService.updateEmployeeAddress(address).then().catch(error => console.log(error));
         alert("successfull");
-        history.push("/employees");
+        window.location.href = "http://localhost:3000/view-employee/" + id;
     }
-    useEffect(() => {
-        EmployeeService.getEmployeeById(empId).then((res) => {
-            let employee = res.data;
-            setEmail(employee.mail);
-            setPassword(employee.salary);
-            setName(employee.name);
-            setEmpId(employee.empId);
+    useEffect( () => {
+
+         EmployeeService.getEmployeeById(id).then((response) => {
+            setName(response.data.name);
+            setEmail(response.data.mail);
+            setPassword(response.data.password);
+        }).catch(error => {
+            console.log(error);
         });
-        EmployeeService.getEmployeeIdentityById(empId).then((res) => {
-            let identity = res.data;
-            setAadhar(identity.aadharNo);
-            setPan(identity.panNo);
+         EmployeeService.getEmployeeIdentitybyId(id).then((response) => {
+            setAadhar(response.data.aadharNo);
+            setPan(response.data.panNo);
+        }).catch(error => {
+            console.log(error);
         });
-        EmployeeService.getEmployeeAddressById(empId).then((res) => {
-            let address = res.data;
-            setLocalAddress(address.localAddress);
-            setPermanentAddress(address.permanentAddress);
+         EmployeeService.getEmployeeAddressbyId(id).then((response) => {
+            setLocalAddress(response.data.localAddress);
+            setPermanentAddress(response.data.permanentAddress);
+        }).catch(error => {
+            console.log(error);
         });
+        EmployeeService.getDepartment().then((response)=>{
+            setDepartments(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+
     }, []);
 
-
-
-
+    const dep_items= departments.map((dep)=> <option value={dep.depId}>{dep.depId} - {dep.designation} {dep.depName}</option>)
 
     return (
         <div>
@@ -75,7 +77,7 @@ export default function EditEmployeeComponent() {
                                     <label className="form-label">Update Email</label>
                                     <input
                                         type="email"
-                                        placeholder="Enter new Email"
+                                        placeholder={mail}
                                         name="email"
                                         className="form-control"
                                         value={mail}
@@ -88,7 +90,7 @@ export default function EditEmployeeComponent() {
                                     <label className="form-label">Update Name</label>
                                     <input
                                         type="text"
-                                        placeholder="Update name"
+                                        placeholder={name}
                                         name="name"
                                         className="form-control"
                                         value={name}
@@ -97,12 +99,26 @@ export default function EditEmployeeComponent() {
                                     </input>
 
                                 </div>
+                                <div className="form-group mb-2">
+                                    <label className="form-label">Update Department  -</label>
+                                    <select
+                                        //     name="empid"
+                                        //     className="form-control"
+                                        value={depId}
+                                        //     required="true"
+                                        onChange={(e) => setDepId(e.target.value)}
+                                        // >
+                                    >
+                                        {dep_items}
+                                    </select>
+
+                                </div>
 
                                 <div className="form-group mb-2">
                                     <label className="form-label">Update Aadhar Number</label>
                                     <input
                                         type="text"
-                                        placeholder="Enter the Aadhar Number"
+                                        placeholder={aadharNo}
                                         name="aadharNo"
                                         className="form-control"
                                         value={aadharNo}
@@ -115,7 +131,7 @@ export default function EditEmployeeComponent() {
                                     <label className="form-label">Update Pan Number</label>
                                     <input
                                         type="text"
-                                        placeholder="Enter the name"
+                                        placeholder={panNo}
                                         name="panNo"
                                         className="form-control"
                                         value={panNo}
@@ -129,7 +145,7 @@ export default function EditEmployeeComponent() {
                                     <label className="form-label">Update Local Address</label>
                                     <input
                                         type="text"
-                                        placeholder="Enter the local address"
+                                        placeholder={localAddress}
                                         name="localAddress"
                                         className="form-control"
                                         value={localAddress}
@@ -142,7 +158,7 @@ export default function EditEmployeeComponent() {
                                     <label className="form-label">Update Permanent Address</label>
                                     <input
                                         type="text"
-                                        placeholder="Enter the permanent address"
+                                        placeholder={permanentAddress}
                                         name="parmanentAddress"
                                         className="form-control"
                                         value={permanentAddress}
@@ -152,7 +168,7 @@ export default function EditEmployeeComponent() {
 
                                 </div>
 
-                                <button className="btn btn-success" onClick={(e)=> updateEmployeeAuth(e)} >Update</button>
+                                <button className="btn btn-success"  onClick={(e)=> updateEmployeeAuth(e)} >Update</button>
                             </form>
                         </div>
                     </div>
