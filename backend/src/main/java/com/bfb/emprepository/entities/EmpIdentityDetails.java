@@ -9,12 +9,13 @@ import lombok.*;
 @Builder
 @Table(name = "emp_identity_details")
 public class EmpIdentityDetails {
+//    @GeneratedValue
     @Id
     @Column(name = "emp_id")
     private Integer empId;
-    @Column(name = "aadhar_no", nullable = false, length = 12)
+    @Column(name = "aadhar_no", nullable = false, length = 12, unique = true)
     private String aadharNo;
-    @Column(name = "pan_no", nullable = false, length = 10)
+    @Column(name = "pan_no", nullable = false, length = 10, unique = true)
     private String panNo;
 
     @OneToOne

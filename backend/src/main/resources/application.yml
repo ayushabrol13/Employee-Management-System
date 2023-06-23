@@ -4,13 +4,13 @@ server:
 #caffeine configuration
 spring:
   cache:
-    cache-names: employees
+    cache-names: employees, departments, empdetail, address
     caffeine:
-      spec: maximumSize=500, expireAfterAccess=60M
+      spec: maximumSize=500, expireAfterAccess=60s
   datasource:
-    url: jdbc:mysql://localhost:3306/employee
-    username: root
-    password: password
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/employee
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -24,3 +24,14 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+#  security:
+#    user:
+#      name: "me"
+#      password: "admin"
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+#  web:
+#    resources:
+#      static-locations:

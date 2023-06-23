@@ -34,8 +34,8 @@ public class EmployeesController {
     }
 
     @PutMapping("/employees")
-    public Employees replaceEmployee(@RequestBody Employees emp) {
-        return empService.replaceEmployee(emp);
+    public Employees updateEmployee(@RequestBody Employees emp) {
+        return empService.updateEmployee(emp);
     }
 
     @DeleteMapping("/employees/{eid}")

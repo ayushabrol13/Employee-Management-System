@@ -4,16 +4,21 @@ import com.bfb.emprepository.dao.EmpAddressRepo;
 import com.bfb.emprepository.entities.EmpAddress;
 import com.bfb.emprepository.services.EmpAddressSer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = {"address"})
 public class EmpAddressSerImpl implements EmpAddressSer {
 
     @Autowired
     private EmpAddressRepo addressRepo;
     @Override
+    @CachePut(cacheNames = "address")
     public EmpAddress createEmpAddress(EmpAddress address) {
         return addressRepo.save(address);
     }
@@ -24,6 +29,7 @@ public class EmpAddressSerImpl implements EmpAddressSer {
     }
 
     @Override
+    @CacheEvict(cacheNames = "address", allEntries = true)
     public void deleteEmpAddress(Integer addId) {
         addressRepo.deleteById(addId);
     }
