@@ -19,7 +19,9 @@ class EmployeeService{
     async getEmployeeAddressbyId(employeeId){
         return axios.get(EMPLOYEE_BASE_REST_API_URL+"/address/"+employeeId);
     }
-
+    async getDepartment(){
+        return axios.get(DEPARTMENT_BASE_REST_API_URL);
+    }
     async getDepartmentById(depId){
         return axios.get(DEPARTMENT_BASE_REST_API_URL+"/"+depId);
     }
@@ -38,6 +40,20 @@ class EmployeeService{
         return axios.delete((EMPLOYEE_BASE_REST_API_URL+"/"+empId));
     }
 
+    async updateEmployee(employee){
+        console.log("empOK")
+        return axios.put(EMPLOYEE_BASE_REST_API_URL,employee);
+    }
+    async updateEmployeeIdentity(identity){
+        console.log("IdOk")
+
+        return axios.put(EMPLOYEE_BASE_REST_API_URL+"/identity",identity);
+    }
+    async updateEmployeeAddress(address){
+        console.log("AddOk")
+
+        return axios.put(EMPLOYEE_BASE_REST_API_URL+"/address",address);
+    }
 
 }
 

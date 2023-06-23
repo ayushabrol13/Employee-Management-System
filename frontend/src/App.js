@@ -25,7 +25,7 @@ function App() {
               <Route path="/view-employee/:id" element={<EmployeeDetail/>} />
               <Route path="/add-employee" element={<CreateEmployeeAuth/>} />
               <Route path="/sign-up" element={<CreateEmployeeAuth />} />
-                <Route path="/update-form" element={<EditEmployeeComponent />} />
+              <Route path="/update-form/:id" element={<EditEmployeeComponent />} />
             </Routes>
           </div>
         </Router>

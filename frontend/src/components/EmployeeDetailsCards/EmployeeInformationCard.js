@@ -10,7 +10,6 @@ export default function EmployeeInformationCard(){
   useEffect(() => {
     EmployeeService.getEmployeeById(id).then((response)=>{
       setEmployee(response.data)
-      console.log(response.data);
     }).catch(error=>{
       console.log(error);
     });
@@ -22,22 +21,7 @@ export default function EmployeeInformationCard(){
     });
   }, []);
 
-  // useEffect(() => {
-  //   EmployeeService.getAddressById(id).then((response)=>{
-  //     setAddreses(response.data)
-  //     console.log(response.data);
-  //   }).catch(error=>{
-  //     console.log(error);
-  //   })
-  // }, []);
 
-
-
-  //const[empId,setEmpId]=useState(0);
-  //const[name,setName]=useState('');
-  //const[email,setEmail]=useState('');
-  //const[localAddress,setLocalAddress]=useState('');
-  //const[permanentAddress,setPermanentAddress]=useState('');
 
 
   return(

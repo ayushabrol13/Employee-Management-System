@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import EmployeeService from "../../services/EmployeeService";
 export default function CreateEmployeeAuth(){
     const [mail,setEmail]= useState('');
@@ -8,14 +8,26 @@ export default function CreateEmployeeAuth(){
 
     const [aadharNo,setAadhar]= useState('');
     const [panNo,setPan]=useState('');
-    const department={depId:2};
+    const[depId,setDepId]=useState(0);
     const [localAddress,setLocalAddress]= useState('');
     const [permanentAddress,setPermanentAddress]=useState('');
-    console.log(panNo+" "+aadharNo);
+    const [departments,setDepartments]=useState([{}]);
+
+    useEffect( () => {
+        EmployeeService.getDepartment().then((response)=>{
+            setDepartments(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+
+    },[]);
     const saveEmployeeAuth =async (e) => {
+
+
+
         e.preventDefault();
+        const department={depId};
         const employee = {empId, name, mail, password, department};
-        const employees = {"empId": empId};
         const identity = {empId,panNo, aadharNo, employee};
         const address = {empId,localAddress, permanentAddress, employee};
         await EmployeeService.createEmployee(employee).then((response)=>{
@@ -25,6 +37,7 @@ export default function CreateEmployeeAuth(){
         await EmployeeService.createEmployeeAddress(address);
         alert("successfull");
     }
+    const dep_items= departments.map((dep)=> <option value={dep.depId}>{dep.depId} - {dep.designation} {dep.depName}</option>)
 
     return(
         <div>
@@ -76,20 +89,24 @@ export default function CreateEmployeeAuth(){
                                     </input>
 
                                 </div>
-                                {/*<div className="form-group mb-2">*/}
-                                {/*    <label className="form-label">Employee Id</label>*/}
-                                {/*    <input*/}
-                                {/*        type="number"*/}
-                                {/*        placeholder="Enter the employee id"*/}
-                                {/*        name="empid"*/}
-                                {/*        className="form-control"*/}
-                                {/*        value={empId}*/}
-                                {/*        required="true"*/}
-                                {/*        onChange={(e) => setEmpId(e.target.value)}*/}
-                                {/*    >*/}
-                                {/*    </input>*/}
+                                <div className="form-group mb-2">
+                                    <label className="form-label">Department Id  -</label>
+                                    <select
+                                    //     name="empid"
+                                    //     className="form-control"
+                                       value={depId}
+                                    //     required="true"
+                                       onChange={(e) => setDepId(e.target.value)}
+                                    // >
+                                        >
+                                        {dep_items}
+                                    </select>
 
-                                {/*</div>*/}
+                                </div>
+
+
+
+
                                 <div className="form-group mb-2">
                                     <label className="form-label">Aadhar Number</label>
                                     <input

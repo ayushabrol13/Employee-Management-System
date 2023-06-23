@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import EmployeeService from "../../services/EmployeeService";
 
@@ -7,15 +7,20 @@ export default function EmployeeProfileCard() {
     const[localAddress,setLocalAddress]=useState('');
     const[mailingId,setMailingId]=useState('');
 
-
     const {id}= useParams();
     const[employee,setEmployee]=useState([]);
+
+    const UpdatePage=(e)=>{
+        window.location.href="http://localhost:3000/update-form/"+id;
+    }
+
+
+
     useEffect(() => {
         EmployeeService.getEmployeeById(id).then((response)=>{
             setEmployee(response.data);
             setDepartment(response.data.department);
             setMailingId('mailto:'+response.data.mail);
-            console.log(response.data);
         }).catch(error=>{
             console.log(error);
         })
@@ -25,7 +30,6 @@ export default function EmployeeProfileCard() {
         }).catch(error=>{
             console.log(error);
         })
-
 
     }, []);
     return (
@@ -38,7 +42,7 @@ export default function EmployeeProfileCard() {
                     <p className="text-muted mb-1">{department.depName}</p>
                     <p className="text-muted mb-4">{localAddress}</p>
                     <div className="d-flex justify-content-center mb-2">
-                        <button type="button" className="btn btn-primary" style={{ backgroundColor: "green" }}>
+                        <button type="button" className="btn btn-primary"onClick={(e)=> UpdatePage(e)} style={{ backgroundColor: "green" }}>
                             Update
                         </button>
                         <a href={mailingId}>

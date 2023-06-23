@@ -5,42 +5,6 @@ import LoginService from "../services/LoginService";
 export default function Login(){
   const [empId, setEmpId] = useState('');
   const [password, setPassword] = useState('');
-  const[flag,setFlag]=useState(false);
-  const [employee,setEmployee]=useState([]);
-  let originalPassword;
-
-
-  // function  SetValue() {
-  //   console.log(empId);
-  //   useEffect(() => {
-  //     EmployeeService.getEmployeeById(empId).then((response) => {
-  //       console.log("ok");
-  //       setEmployee(response.data);
-  //       originalPassword = employee;
-  //       console.log(response.data);
-  //     }).catch(error => {
-  //       console.log(error);
-  //     })
-  //
-  //   }, []);
-  // }
-
-
-  // const setResponseValue = () => {
-  //   if(empId)
-  //   EmployeeService.getEmployeeById(empId).then((response) => {
-  //       setEmployee(response.data);
-  //       originalPassword = employee;
-  //       console.log(response.data);
-  //     }).catch(error => {
-  //       console.log(error);
-  //     })
-  //
-  // }
-  //
-  // useEffect(() => {
-  //   setResponseValue();
-  // }, []);
 
   return (
     <div style={styles.container}>
