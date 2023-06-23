@@ -38,4 +38,13 @@ public class EmpAddressSerImpl implements EmpAddressSer {
     public EmpAddress fetchEmpAddressById(Integer id) {
         return addressRepo.findById(id).get();
     }
+
+    @Override
+    public EmpAddress updateEmpAddress(EmpAddress address) {
+        EmpAddress existingAddress = addressRepo.findById(address.getEmpId()).orElse(null);
+        existingAddress.setLocalAddress(address.getLocalAddress());
+        existingAddress.setPermanentAddress(address.getPermanentAddress());
+        existingAddress.setEmployees(address.getEmployees());
+        return addressRepo.save(existingAddress);
+    }
 }

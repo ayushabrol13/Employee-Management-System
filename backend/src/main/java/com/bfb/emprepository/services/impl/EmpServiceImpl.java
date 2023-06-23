@@ -43,7 +43,7 @@ public class EmpServiceImpl implements EmpService {
     @CachePut(cacheNames = "employees")
     public Employees updateEmployee(Employees employee) {
         Employees existingEmp = new Employees();
-        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getEmpId()==0)
+        if(employee.getMail().equalsIgnoreCase("") || employee.getName().equalsIgnoreCase("")|| employee.getPassword().equals(""))
             throw new InputFieldsEmptyException();
         existingEmp.setEmpId(employee.getEmpId());
         existingEmp.setName(employee.getName());
@@ -94,6 +94,7 @@ public class EmpServiceImpl implements EmpService {
         if (Objects.nonNull(employees.getMail()) && !"".equalsIgnoreCase(employees.getMail())){
             emp.setMail(employees.getMail());
         }
+      
 //        if (Objects.nonNull(employees.getPassword()) && !"".equalsIgnoreCase(employees.getPassword())){
 //            emp.setPassword(employees.getPassword());
 //        }

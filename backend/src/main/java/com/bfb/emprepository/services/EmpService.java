@@ -12,7 +12,6 @@ public interface EmpService{
     public Employees updateEmployee(Employees employee);
     public String deleteEmployee(int empId);
     public List<Employees> fetchEmployees();
-
     public Employees updateEmployeeById(Integer eId, Employees employees);
 
     public void saveTokenForEmployee(String token, Employees employees);

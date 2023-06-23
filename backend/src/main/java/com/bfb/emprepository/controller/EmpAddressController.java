@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees/address")
+@CrossOrigin("*")
 public class EmpAddressController {
     @Autowired
     private EmpAddressSer addressSer;
@@ -32,6 +33,10 @@ public class EmpAddressController {
 
     @GetMapping("/{eId}")
     public EmpAddress fetchEmpAddressById(@PathVariable("eId") Integer id){
+        return addressSer.fetchEmpAddressById(id);}
+    @PutMapping("")
+    public EmpAddress updateEmpAddress(@RequestBody EmpAddress address) {
+        return addressSer.createEmpAddress(address);
         return addressSer.fetchEmpAddressById(id);
     }
 }

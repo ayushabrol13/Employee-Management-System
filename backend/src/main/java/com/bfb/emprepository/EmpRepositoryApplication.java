@@ -16,6 +16,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @SpringBootApplication
 @EnableJpaRepositories("com.bfb.emprepository.dao")
 @EnableCaching
@@ -31,6 +32,7 @@ public class EmpRepositoryApplication implements CommandLineRunner {
     private DepartmentRepo departmentRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public static void main(String[] args) {
         SpringApplication.run(EmpRepositoryApplication.class, args);

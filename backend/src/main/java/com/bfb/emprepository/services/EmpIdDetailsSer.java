@@ -12,4 +12,6 @@ public interface EmpIdDetailsSer {
     void deleteEmpIdDetails(Integer detailsId);
 
     public EmpIdentityDetails fetchEmpIdDetailsById(Integer id);
+
+    public EmpIdentityDetails updateEmployeeIdentity(EmpIdentityDetails details);
 }

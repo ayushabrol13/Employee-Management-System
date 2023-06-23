@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees/identity")
+@CrossOrigin("*")
 public class EmpIdDetailsController {
 
     @Autowired
@@ -33,5 +34,10 @@ public class EmpIdDetailsController {
     @GetMapping("/{eId}")
     public EmpIdentityDetails fetchEmpIdDetailsById(@PathVariable("eId") Integer id){
         return ser.fetchEmpIdDetailsById(id);
+    }
+
+    @PutMapping("")
+    public EmpIdentityDetails updateEmpIdDetails(@RequestBody EmpIdentityDetails details) {
+        return ser.createIdDetails(details);
     }
 }
