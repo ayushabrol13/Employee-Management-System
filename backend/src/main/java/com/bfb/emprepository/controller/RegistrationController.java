@@ -6,6 +6,7 @@ import com.bfb.emprepository.services.EmpService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,11 +15,6 @@ public class RegistrationController {
     private EmpService empService;
     @Autowired
     private ApplicationEventPublisher publisher;
-
-    @GetMapping("/hello")
-    public String helloWorld(){
-        return "Hey there! Welcome to the Employee Management System made by Brute Force Bandits...";
-    }
 
     @PostMapping("/register")
     public String registerEmployee(@RequestBody Employees employees, final HttpServletRequest request){
@@ -39,7 +35,7 @@ public class RegistrationController {
     }
 
     private String applicationUrl(HttpServletRequest request) {
-        return "https://"
+        return "http://"
                 + request.getServerName()
                 + ":"
                 + request.getServerPort()

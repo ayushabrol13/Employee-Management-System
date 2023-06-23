@@ -24,4 +24,14 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-
+#  security:
+#    user:
+#      name: "me"
+#      password: "admin"
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+#  web:
+#    resources:
+#      static-locations:

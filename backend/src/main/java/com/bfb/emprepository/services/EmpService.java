@@ -1,10 +1,11 @@
 package com.bfb.emprepository.services;
 
 import com.bfb.emprepository.entities.Employees;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.*;
 
-public interface EmpService {
+public interface EmpService{
 
     public Employees createEmployee(Employees employee);
     public Employees fetchEmployeeById(int eId);

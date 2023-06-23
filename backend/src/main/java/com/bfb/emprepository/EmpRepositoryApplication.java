@@ -59,6 +59,7 @@ public class EmpRepositoryApplication implements CommandLineRunner {
                     .mail("bfb@ninjacart.com")
                     .password(passwordEncoder.encode("admin"))
                     .role("ROLE_EMPLOYEE")
+                    .enabled(true)
                     .department(d1)
                     .build();
             employeeRepo.save(employees);

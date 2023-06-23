@@ -16,6 +16,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
 
     @Autowired
     private EmpService empService;
+
     @Override
     public void onApplicationEvent(RegistrationCompleteEvent event) {
         // Create Verification Token for the Employee with Link...

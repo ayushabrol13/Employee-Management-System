@@ -13,10 +13,14 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 @CacheConfig(cacheNames = {"employees"})
@@ -111,8 +115,17 @@ public class EmpServiceImpl implements EmpService {
         Calendar cal = Calendar.getInstance();
 
         if(verificationToken.getExpirationTime().getTime() <= cal.getTime().getTime())
-            return "The generated token got expired. Kindly, generate a new one...";
-      
+            return "The token got expired. Kindly, generate a new one...";
+
+        emp.setEnabled(true);
+        employeeRepo.save(emp);
+        verificationTokenRepo.delete(verificationToken);
         return "valid";
     }
+
+    // This is for UserDetailsService extended by EmpService for the Spring Security...
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return employeeRepo.findById(Integer.parseInt(username)).get();
+//    }
 }
