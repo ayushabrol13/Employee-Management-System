@@ -36,7 +36,6 @@ public class EmpAddressController {
         return addressSer.fetchEmpAddressById(id);}
     @PutMapping("")
     public EmpAddress updateEmpAddress(@RequestBody EmpAddress address) {
-        return addressSer.createEmpAddress(address);
-        return addressSer.fetchEmpAddressById(id);
+        return addressSer.updateEmpAddress(address);
     }
 }
