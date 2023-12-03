@@ -38,7 +38,7 @@ public class Employees {
     @PreUpdate
     private void calculateRole(){
         String domain = mail.split("@")[1];
-        if(domain.equalsIgnoreCase("ninjacart.com"))
+        if(domain.equalsIgnoreCase("gmail.com"))
             this.role = "ADMIN";
         else
             this.role = "EMPLOYEE";

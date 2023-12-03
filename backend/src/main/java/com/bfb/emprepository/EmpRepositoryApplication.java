@@ -40,7 +40,6 @@ public class EmpRepositoryApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        System.out.println(employeeRepo.findByMailIgnoreCase("bfb@ninjacart.com").toString());
         Department d1 = new Department();
         if(departmentRepo.findByDesignation("SDE") == null) {
             d1 = Department.builder().depId(1).depName("Information Technology").designation("SDE").build();
@@ -54,11 +53,11 @@ public class EmpRepositoryApplication implements CommandLineRunner {
             Department d5 = Department.builder().depId(5).depName("Sales & Distribution").designation("S&D").build();
             departmentRepo.save(d5);
         }
-        if((employeeRepo.findByMailIgnoreCase("bfb@ninjacart.com")) == null) {
+        if((employeeRepo.findByMailIgnoreCase("abc@gmail.com")) == null) {
             Employees employees = Employees.builder()
                     .empId(24600)
-                    .name("Brute Force Bandits")
-                    .mail("bfb@ninjacart.com")
+                    .name("Ayush Abrol")
+                    .mail("abc@gmail.com")
                     .password(passwordEncoder.encode("admin"))
                     .role("ROLE_EMPLOYEE")
                     .enabled(true)

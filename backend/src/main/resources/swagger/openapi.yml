@@ -4,7 +4,7 @@ info:
   description: Spring OpenAPI
   version: 1.0.0
   contact:
-    email: soni.12@iitj.ac.in
+    email: abc@gmail.com
 tags:
   - name: employee-controller
     description: Employee Controller

@@ -43,23 +43,23 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(
-//                .formLogin(login -> login
-//                        .loginPage("/home/signin")
-//                        .defaultSuccessUrl("/home/hello")
-//                        .permitAll()
-//                )
-//                .rememberMe(Customizer.withDefaults())
-//                .logout(logout -> logout
-//                        .logoutUrl("/home/logout")
-////                        .logoutSuccessUrl("/login")
-//                        .permitAll()
+                .formLogin(login -> login
+                       .loginPage("/home/signin")
+                       .defaultSuccessUrl("/home/hello")
+                       .permitAll()
+               )
+               .rememberMe(Customizer.withDefaults())
+               .logout(logout -> logout
+                       .logoutUrl("/home/logout")
+                       .logoutSuccessUrl("/login")
+                       .permitAll()
+               
                 );
 
         http.authenticationProvider(daoAuthenticationProvider());
         return http.build();
 
-//         http.cors().and().csrf().disable().authorizeHttpRequests().requestMatchers(WHITE_LIST_URLS).permitAll(); return http.build();
+        http.cors().and().csrf().disable().authorizeHttpRequests().requestMatchers(WHITE_LIST_URLS).permitAll(); return http.build();
     }
 
     @Bean

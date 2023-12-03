@@ -124,9 +124,9 @@ public class EmpServiceImpl implements EmpService {
         return "valid";
     }
 
-    // This is for UserDetailsService extended by EmpService for the Spring Security...
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return employeeRepo.findById(Integer.parseInt(username)).get();
-//    }
+    //This is for UserDetailsService extended by EmpService for the Spring Security...
+   @Override
+   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       return employeeRepo.findById(Integer.parseInt(username)).get();
+   }
 }

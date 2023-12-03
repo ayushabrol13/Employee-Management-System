@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DefaultController {
     @GetMapping("/hello")
     public ResponseEntity<String> helloWorld(){
-        return ResponseEntity.ok("Hey there! Welcome to the Employee Management System made by Brute Force Bandits...");
+        return ResponseEntity.ok("Hey there! Welcome to the Employee Management System made by Ayush Abrol...");
     }
 
     @RequestMapping("/signin")
     public String logInPage(){
-//        String htmlContent = "<html><body><h1>Hello, World!</h1></body></html>";
-//        return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(htmlContent);
         return "sign-in";
     }
 }
